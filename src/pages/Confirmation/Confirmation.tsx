@@ -28,17 +28,22 @@ const Confirmation: React.FC<{ text: string }> = (props) => {
       confirmEmail(hash);
     }
   }, [location.pathname, location.search]);
+  let displayText: string = '';
+
+  if (location.pathname === '/register/confirm/success') {
+    displayText = 'Your account is confirmed you can sign in';
+  } else if (location.pathname === '/password/pending/success') {
+    displayText = 'Your password has been updated successfully';
+  } else if (props.text) {
+    displayText = props.text;
+  }
 
   return (
     <div className=' w-full h-screen flex flex-col items-center'>
       <Logo className=' my-10' />
       <div className='flex flex-col justify-center items-center h-3/4 gap-4'>
         <img src={CheckCircle} alt='circle' width={56} />
-        <p className=' text-text-dark text-[18px]'>
-          {location.pathname === '/register/success'
-            ? 'Your account is confirmed you can sign in'
-            : props.text}
-        </p>
+        <p className=' text-text-dark text-[18px]'>{displayText}</p>
         <Link to='/login' className=' w-96 my-16'>
           <Outlet />
         </Link>

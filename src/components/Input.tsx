@@ -12,7 +12,7 @@ const Input: React.FC<{
   minLength?: number;
   customValidation?: any;
   errors?: any;
-  isDirty: boolean | undefined;
+  isDirty?: boolean | undefined;
   tip?: string;
 }> = (props) => {
   const hasTip: boolean = !props.errors[props.name] && !props.isDirty;

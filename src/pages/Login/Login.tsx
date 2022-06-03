@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Vaccine } from 'assets/images';
 import { Logo } from 'components/svg';
-import Input from 'components/Input';
+import { Input, Button } from 'components';
 
 type FormInputs = {
   username: string;
@@ -78,12 +78,7 @@ const Login = () => {
               Forgot password?
             </Link>
           </div>
-          <button
-            type='submit'
-            className=' w-full bg-main-green font-black text-white py-4 rounded-lg'
-          >
-            Log In
-          </button>
+          <Button text='LOG IN' />
         </form>
         <div className='w-full flex justify-center items-center gap-2 my-6 '>
           <p className=' text-grayish'>Don't have an account?</p>

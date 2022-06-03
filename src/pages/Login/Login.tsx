@@ -1,9 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Vaccine } from 'assets/images';
 import { Logo } from 'components/svg';
 import { Input, Button } from 'components';
+import axios from 'axios';
+
+const baseURL: string = 'https://coronatime-api.devtest.ge/api/login';
 
 type FormInputs = {
   username: string;
@@ -15,14 +18,44 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, dirtyFields },
   } = useForm<FormInputs>({
     mode: 'onChange',
     shouldUnregister: true,
-    // delayError: 500,
   });
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
+  const navigate = useNavigate();
+
+  const loginUser = (username: string, password: string) => {
+    axios
+      .post(baseURL, {
+        username,
+        password,
+      })
+      .then((response) => {
+        const token: string = response.data.token;
+        localStorage.setItem('userToken', token);
+        navigate('/');
+      })
+      .catch((error) => {
+        const response = error.response;
+        if (response.status === 422) {
+          setError('username', {
+            type: 'custom',
+            message: response.data[0].message,
+          });
+        } else if (response.status === 401) {
+          setError('password', {
+            type: 'custom',
+            message: response.data.message,
+          });
+        }
+      });
+  };
+
+  const onSubmit: SubmitHandler<FormInputs> = (data) =>
+    loginUser(data.username, data.password);
 
   return (
     <div className=' flex flex-row justify-between'>

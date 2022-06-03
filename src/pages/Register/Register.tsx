@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Vaccine } from 'assets/images';
 import { Logo } from 'components/svg';
 import Input from 'components/Input';
+import axios from 'axios';
 
 type FormInputs = {
   username: string;
@@ -12,7 +13,28 @@ type FormInputs = {
   password2: string;
 };
 
+const baseURL: string = 'https://coronatime-api.devtest.ge/api/register';
+
 const Register = () => {
+  const createPost = (
+    username: string,
+    email: string,
+    password: string,
+    repeatPassword: string
+  ) => {
+    axios
+      .post(baseURL, {
+        username,
+        email,
+        password,
+        repeatPassword,
+        redirectOnConfirm: `${window.location.host}/login`,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   const {
     register,
     handleSubmit,
@@ -24,7 +46,8 @@ const Register = () => {
     // delayError: 500,
   });
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormInputs> = (data) =>
+    createPost(data.username, data.email, data.password, data.password2);
 
   const passwordsMatch = () => {
     return watch('password') === watch('password2');

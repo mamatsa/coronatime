@@ -13,7 +13,10 @@ const Input: React.FC<{
   customValidation?: any;
   errors?: any;
   isDirty: boolean | undefined;
+  tip?: string;
 }> = (props) => {
+  const hasTip: boolean = !props.errors[props.name] && !props.isDirty;
+
   return (
     <div className={'flex flex-col'}>
       <label htmlFor={props.id} className=' font-bold'>
@@ -28,6 +31,13 @@ const Input: React.FC<{
             value: props.required,
             message: 'This field is required',
           },
+
+          ...(props.name === 'email' && {
+            pattern: {
+              value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+              message: 'Please enter valid email',
+            },
+          }),
           minLength: {
             value: props.minLength,
             message: `Enter min ${props.minLength} symbols`,
@@ -40,15 +50,20 @@ const Input: React.FC<{
           ' border-main-green outline-main-green  bg-input-success bg-no-repeat bg-[center_right_2rem]'
         } ${props.errors[props.name] && 'border-error-red outline-error-red'}`}
       />
-      {props.errors && (
-        <p
-          className=' flex gap-2 text-error-red mt-1 h-6 text-sm font-medium'
-          id={`${props.id}InputError`}
-        >
-          {props.errors[props.name]?.message && <ErrorMark />}
-          {props.errors[props.name]?.message}
-        </p>
-      )}
+
+      <p
+        className={` flex gap-2  mt-1 h-6 text-sm font-medium ${
+          hasTip ? ' text-grayish' : 'text-error-red'
+        } `}
+        id={`${props.id}InputError`}
+      >
+        {hasTip && props.tip}
+        {(props.errors[props.name]?.message ||
+          props.errors[props.name]?.type === 'validate') && <ErrorMark />}
+        {props.errors[props.name]?.message}
+        {props.errors[props.name]?.type === 'validate' &&
+          props.customValidation.message}
+      </p>
     </div>
   );
 };

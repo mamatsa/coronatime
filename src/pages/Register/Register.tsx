@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Vaccine } from 'assets/images';
 import { Logo } from 'components/svg';
@@ -16,7 +16,27 @@ type FormInputs = {
 const baseURL: string = 'https://coronatime-api.devtest.ge/api/register';
 
 const Register = () => {
-  const createPost = (
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    formState: { errors, dirtyFields },
+  } = useForm<FormInputs>({
+    mode: 'onChange',
+    shouldUnregister: true,
+  });
+
+  const onSubmit: SubmitHandler<FormInputs> = (data) =>
+    registerUser(data.username, data.email, data.password, data.password2);
+
+  const passwordsMatch = () => {
+    return watch('password') === watch('password2');
+  };
+
+  const navigate = useNavigate();
+
+  const registerUser = (
     username: string,
     email: string,
     password: string,
@@ -28,29 +48,18 @@ const Register = () => {
         email,
         password,
         repeatPassword,
-        redirectOnConfirm: `${window.location.host}/login`,
+        redirectOnConfirm: `${window.location.host}/register/confirm/success`,
       })
       .then((response) => {
-        console.log(response);
+        navigate('/register/confirm');
+      })
+      .catch((error) => {
+        const errorObj = error.response.data[0];
+        setError(errorObj.context.label, {
+          type: 'custom',
+          message: errorObj.message,
+        });
       });
-  };
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, dirtyFields },
-  } = useForm<FormInputs>({
-    mode: 'onChange',
-    shouldUnregister: true,
-    // delayError: 500,
-  });
-
-  const onSubmit: SubmitHandler<FormInputs> = (data) =>
-    createPost(data.username, data.email, data.password, data.password2);
-
-  const passwordsMatch = () => {
-    return watch('password') === watch('password2');
   };
 
   return (

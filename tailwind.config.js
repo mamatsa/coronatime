@@ -7,6 +7,7 @@ module.exports = {
         'error-red': '#CC1E1E',
         'main-green': '#0FBA68',
         'main-blue': '#2029F3',
+        'text-dark': '#010414',
       },
       backgroundImage: {
         'input-success': "url('assets/images/Success.svg')",

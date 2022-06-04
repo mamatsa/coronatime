@@ -3,12 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { Navbar } from 'pages/Dashboard/components';
 
-const Dashboard = () => {
+const Dashboard: React.FC<{ username: string | null; onLogout: () => void }> = (
+  props
+) => {
   const { t } = useTranslation();
   const activeClass = 'font-bold border-b-[3px] border-black pb-4';
   return (
     <div className='  py-10 px-28'>
-      <Navbar />
+      <Navbar username={props.username} onLogout={props.onLogout} />
       <h1 className=' font-bold text-[25px]'>{t('dashboard.title')}</h1>
       <ul className='flex gap-8 mt-10'>
         <li>

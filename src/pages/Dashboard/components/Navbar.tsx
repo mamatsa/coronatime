@@ -4,7 +4,9 @@ import { Logo } from 'components/svg';
 import { LanguageChanger } from 'components';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar: React.FC<{ username: string | null; onLogout: () => void }> = (
+  props
+) => {
   const { t } = useTranslation();
 
   return (
@@ -15,11 +17,13 @@ const Navbar = () => {
           <LanguageChanger dashboard={true} />
         </li>
         <li>
-          <p className=' font-bold'>Name</p>
+          <p className=' font-bold'>{props.username}</p>
         </li>
         <div className=' w-px h-8 bg-light-gray'></div>
         <li>
-          <Link to='/login'>{t('log_out')}</Link>
+          <Link to='/login' onClick={props.onLogout}>
+            {t('log_out')}
+          </Link>
         </li>
       </ul>
     </div>

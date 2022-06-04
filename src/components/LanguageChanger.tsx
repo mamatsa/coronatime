@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 const LanguageChanger: React.FC<{ dashboard?: boolean }> = (props) => {
   const { i18n } = useTranslation();
   let className: string =
-    'bg-gray-50 border border-gray-300 text-sm rounded-xl focus:border-main-green px-4 outline-none';
+    'bg-gray-50 border border-gray-300 text-sm rounded-xl focus:border-main-green px-4 outline-none cursor-pointer';
 
   if (props.dashboard) {
-    className = ' bg-white outline-none box-border';
+    className = ' bg-white outline-none box-border cursor-pointer';
   }
   return (
     <select

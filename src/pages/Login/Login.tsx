@@ -14,13 +14,16 @@ type FormInputs = {
   remember: string;
 };
 
-const Login = () => {
+const Login: React.FC<{
+  onLogin: (userToken: string, userName: string) => void;
+}> = (props) => {
   const { t } = useTranslation();
 
   const {
     register,
     handleSubmit,
     setError,
+    watch,
     formState: { errors, dirtyFields },
   } = useForm<FormInputs>({
     mode: 'onChange',
@@ -37,7 +40,7 @@ const Login = () => {
       })
       .then((response) => {
         const token: string = response.data.token;
-        localStorage.setItem('userToken', token);
+        props.onLogin(token, watch('username'));
         navigate('/');
       })
       .catch((error) => {

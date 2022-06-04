@@ -1,10 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Input, Button, AuthNavbar } from 'components';
 import { Vaccine } from 'assets/images';
-import { Logo } from 'components/svg';
-import axios from 'axios';
-import { Input, Button } from 'components';
 
 type FormInputs = {
   username: string;
@@ -16,6 +16,8 @@ type FormInputs = {
 const baseURL: string = 'https://coronatime-api.devtest.ge/api/register';
 
 const Register = () => {
+  const { t, i18n } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -54,42 +56,43 @@ const Register = () => {
         navigate('/register/confirm');
       })
       .catch((error) => {
-        const errorObj = error.response.data[0];
-        setError(errorObj.context.label, {
+        const errorTarget = error.response.data[0].context.label;
+        setError(errorTarget, {
           type: 'custom',
-          message: errorObj.message,
+          message:
+            errorTarget === 'email'
+              ? 'errors.email_taken'
+              : 'errors.username_taken',
         });
       });
   };
 
   return (
     <div className=' flex flex-row justify-between'>
-      <div className=' px-5 md:px-28 py-10 '>
-        <Logo />
-        <h2 className=' font-black text-2xl mt-16'>Welcome to Coronatime</h2>
-        <p className=' text-xl text-grayish my-4'>
-          Please enter required info to sign up
-        </p>
+      <div className=' px-5 md:px-28 py-10 w-full md:w-3/4 2xl:w-2/5 '>
+        <AuthNavbar />
+        <h2 className=' font-black text-2xl mt-16'>{t('register.welcome')}</h2>
+        <p className=' text-xl text-grayish my-4'>{t('register.enter_info')}</p>
         <form onSubmit={handleSubmit(onSubmit)} className=' space-y-2'>
           <Input
-            label='Username'
+            label={t('username')}
             id='username'
             name='username'
             minLength={3}
-            placeholder='Enter unique username'
+            placeholder={t('register.username_placeholder')}
             required={true}
             type='text'
             register={register}
             errors={errors}
             key={1}
             isDirty={dirtyFields.username}
-            tip='Username should be unique, min 3 symbols'
+            tip={t('register.username_format')}
           />
           <Input
-            label='Email'
+            label={t('email')}
             id='email'
             name='email'
-            placeholder='Enter your email'
+            placeholder={t('email')}
             required={true}
             type='email'
             register={register}
@@ -98,11 +101,11 @@ const Register = () => {
             isDirty={dirtyFields.email}
           />
           <Input
-            label='Password'
+            label={t('password')}
             id='password'
             name='password'
             minLength={3}
-            placeholder='Fill in password'
+            placeholder={t('password_placeholder')}
             required={true}
             type='password'
             register={register}
@@ -111,11 +114,11 @@ const Register = () => {
             isDirty={dirtyFields.password}
           />
           <Input
-            label='Repeat Password'
+            label={t('repeat_password')}
             id='password2'
             name='password2'
             minLength={3}
-            placeholder='Repeat password'
+            placeholder={t('repeat_password')}
             required={true}
             type='password'
             register={register}
@@ -124,19 +127,19 @@ const Register = () => {
             isDirty={dirtyFields.password2}
             customValidation={{
               func: passwordsMatch,
-              message: 'Passwords should match',
+              message: t('passwords_should_match'),
             }}
           />
-          <Button text='SIGN UP' />
+          <Button text={t('sign_up')} />
         </form>
         <div className='w-full flex justify-center items-center gap-2 my-6 '>
-          <p className=' text-grayish'>Already have an account?</p>
+          <p className=' text-grayish'>{t('register.already_have_account')}</p>
           <Link to='/login' className='font-bold'>
-            Log In
+            {t('log_in')}
           </Link>
         </div>
       </div>
-      <img src={Vaccine} alt='vaccine' className=' hidden lg:block h-screen' />
+      <img src={Vaccine} alt='vaccine' className=' hidden xl:block h-screen' />
     </div>
   );
 };

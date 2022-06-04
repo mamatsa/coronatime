@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Logo } from 'components/svg';
+import { AuthNavbar } from 'components';
 import { CheckCircle } from 'assets/images';
 
 const baseURL: string = 'https://coronatime-api.devtest.ge/api/confirm-account';
 
 const Confirmation: React.FC<{ text: string }> = (props) => {
+  const { t } = useTranslation();
+
   const location = useLocation();
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -31,19 +34,19 @@ const Confirmation: React.FC<{ text: string }> = (props) => {
   let displayText: string = '';
 
   if (location.pathname === '/register/confirm/success') {
-    displayText = 'Your account is confirmed you can sign in';
+    displayText = 'pending.account_confirmed';
   } else if (location.pathname === '/password/pending/success') {
-    displayText = 'Your password has been updated successfully';
+    displayText = 'pending.password_updated';
   } else if (props.text) {
     displayText = props.text;
   }
 
   return (
-    <div className=' w-full h-screen flex flex-col items-center'>
-      <Logo className=' my-10' />
+    <div className=' w-full h-screen flex flex-col items-center py-10 px-5'>
+      <AuthNavbar />
       <div className='flex flex-col justify-center items-center h-3/4 gap-4'>
         <img src={CheckCircle} alt='circle' width={56} />
-        <p className=' text-text-dark text-[18px]'>{displayText}</p>
+        <p className=' text-text-dark text-[18px]'>{t(displayText)}</p>
         <Link to='/login' className=' w-96 my-16'>
           <Outlet />
         </Link>

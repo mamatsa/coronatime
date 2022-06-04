@@ -1,10 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Input, Button, AuthNavbar } from 'components';
 import { Vaccine } from 'assets/images';
-import { Logo } from 'components/svg';
-import { Input, Button } from 'components';
-import axios from 'axios';
 
 const baseURL: string = 'https://coronatime-api.devtest.ge/api/login';
 
@@ -15,6 +15,8 @@ type FormInputs = {
 };
 
 const Login = () => {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -43,12 +45,12 @@ const Login = () => {
         if (response.status === 422) {
           setError('username', {
             type: 'custom',
-            message: response.data[0].message,
+            message: 'errors.wrong_user',
           });
         } else if (response.status === 401) {
           setError('password', {
             type: 'custom',
-            message: response.data.message,
+            message: 'errors.wrong_password',
           });
         }
       });
@@ -59,19 +61,17 @@ const Login = () => {
 
   return (
     <div className=' flex flex-row justify-between'>
-      <div className=' px-5 md:px-28 py-10 '>
-        <Logo />
-        <h2 className=' font-black text-2xl mt-16'>Welcome back</h2>
-        <p className=' text-xl text-grayish my-4'>
-          Welcome back! Please enter your details
-        </p>
+      <div className=' px-5 py-10 w-full md:px-28 md:w-3/4 2xl:w-2/5'>
+        <AuthNavbar />
+        <h2 className=' font-black text-2xl mt-16'>{t('login.welcome')}</h2>
+        <p className=' text-xl text-grayish my-4'>{t('login.enter_info')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
-            label='Username'
+            label={t('username')}
             id='username'
             name='username'
             minLength={3}
-            placeholder='Enter unique username or email'
+            placeholder={t('login.username_placeholder')}
             required={true}
             type='text'
             register={register}
@@ -80,10 +80,11 @@ const Login = () => {
             isDirty={dirtyFields.username}
           />
           <Input
-            label='Password'
+            label={t('password')}
             id='password'
             name='password'
-            placeholder='Fill in password'
+            minLength={3}
+            placeholder={t('password_placeholder')}
             required={true}
             type='password'
             register={register}
@@ -101,26 +102,26 @@ const Login = () => {
                 className='w-4 h-4 accent-green-600'
               />
               <label htmlFor='remember' className=' text-sm font-semibold ml-2'>
-                Remember this device{' '}
+                {t('login.remember_device')}
               </label>
             </div>
             <Link
               to='/password'
               className=' text-sm text-main-blue font-semibold'
             >
-              Forgot password?
+              {t('login.forgot_password')}
             </Link>
           </div>
-          <Button text='LOG IN' />
+          <Button text={t('log_in')} />
         </form>
         <div className='w-full flex justify-center items-center gap-2 my-6 '>
-          <p className=' text-grayish'>Don't have an account?</p>
+          <p className=' text-grayish'>{t('login.dont_have_account')}</p>
           <Link to='/register' className='font-bold'>
-            Sign up for free
+            {t('login.sign_up_free')}
           </Link>
         </div>
       </div>
-      <img src={Vaccine} alt='vaccine' className=' hidden lg:block h-screen' />
+      <img src={Vaccine} alt='vaccine' className=' hidden xl:block h-screen' />
     </div>
   );
 };

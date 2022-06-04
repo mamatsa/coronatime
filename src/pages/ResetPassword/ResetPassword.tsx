@@ -1,14 +1,16 @@
 import React from 'react';
-import { Logo } from 'components/svg';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Button, Input } from 'components';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Button, Input, AuthNavbar } from 'components';
 
 const baseURL: string =
   'https://coronatime-api.devtest.ge/api/password/recover';
 
 const ResetPassword = () => {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -51,17 +53,17 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className=' w-full h-screen flex flex-col items-center'>
-      <Logo className=' my-10' />
+    <div className=' w-full h-screen flex flex-col items-center py-10 px-5'>
+      <AuthNavbar />
       <div className='flex flex-col justify-center items-center h-3/4 gap-16'>
-        <h2 className=' font-black text-[25px]'>Reset Password</h2>
+        <h2 className=' font-black text-[25px]'>{t('reset_password.title')}</h2>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
           <Input
-            label='Password'
+            label={t('password')}
             id='password'
             name='password'
             minLength={3}
-            placeholder='Fill in password'
+            placeholder={t('password-placeholder')}
             required={true}
             type='password'
             register={register}
@@ -70,11 +72,11 @@ const ResetPassword = () => {
             isDirty={dirtyFields.password}
           />
           <Input
-            label='Repeat Password'
+            label={t('repeat_password')}
             id='password2'
             name='password2'
             minLength={3}
-            placeholder='Repeat password'
+            placeholder={t('repeat_password')}
             required={true}
             type='password'
             register={register}
@@ -83,10 +85,10 @@ const ResetPassword = () => {
             isDirty={dirtyFields.password2}
             customValidation={{
               func: passwordsMatch,
-              message: 'Passwords should match',
+              message: t('passwords_should_match'),
             }}
           />
-          <Button text='RESET PASSWORD' />
+          <Button text={t('reset_password.button_text')} />
         </form>
       </div>
     </div>

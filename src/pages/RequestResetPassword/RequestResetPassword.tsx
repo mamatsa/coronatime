@@ -1,14 +1,16 @@
 import React from 'react';
-import { Logo } from 'components/svg';
-import { useNavigate } from 'react-router-dom';
-import { Button, Input } from 'components';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Button, Input, AuthNavbar } from 'components';
 
 const baseURL: string =
   'https://coronatime-api.devtest.ge/api/password/send-recovery-link';
 
 const RequestResetPassword = () => {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -36,29 +38,29 @@ const RequestResetPassword = () => {
       .catch((error) => {
         setError('email', {
           type: 'custom',
-          message: error.response.data[0].message,
+          message: 'errors.unknown_email',
         });
       });
   };
 
   return (
-    <div className=' w-full h-screen flex flex-col items-center'>
-      <Logo className=' my-10' />
+    <div className=' w-full h-screen flex flex-col items-center py-10 px-5'>
+      <AuthNavbar />
       <div className='flex flex-col justify-center items-center h-3/4 gap-16'>
-        <h2 className=' font-black text-[25px]'>Reset Password</h2>
+        <h2 className=' font-black text-[25px]'>{t('reset_password.title')}</h2>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
           <Input
             id='email'
-            label='Email'
+            label={t('email')}
             name='email'
-            placeholder='Enter your email'
+            placeholder={t('email_placeholder')}
             required={true}
             type='email'
             register={register}
             errors={errors}
             isDirty={dirtyFields.email}
           />
-          <Button text='RESET PASSWORD' />
+          <Button text={t('reset_password.button_text')} />
         </form>
       </div>
     </div>

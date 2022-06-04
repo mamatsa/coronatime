@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Login,
   Register,
@@ -10,6 +11,8 @@ import {
 import { Button } from 'components';
 
 function App() {
+  const { t } = useTranslation();
+
   return (
     <Router>
       <Routes>
@@ -18,20 +21,18 @@ function App() {
 
         <Route
           path='/register/confirm/*'
-          element={<Confirmation text='We have sent you confirmation email' />}
+          element={<Confirmation text='pending.email_sent' />}
         >
-          <Route path='success' element={<Button text='SIGN IN' />} />
+          <Route path='success' element={<Button text={t('sign_in')} />} />
         </Route>
 
         <Route path='/password' element={<RequestResetPassword />} />
         <Route path='/password/reset' element={<ResetPassword />} />
         <Route
           path='/password/pending/*'
-          element={
-            <Confirmation text='We have sent you a confirmation email' />
-          }
+          element={<Confirmation text='pending.email_sent' />}
         >
-          <Route path='success' element={<Button text='SIGN IN' />} />
+          <Route path='success' element={<Button text={t('sign_in')} />} />
         </Route>
       </Routes>
     </Router>

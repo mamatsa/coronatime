@@ -1,0 +1,47 @@
+{
+  "login": {
+    "welcome": "Welcome back",
+    "enter_info": "Welcome back! Please enter your details",
+    "username_placeholder": "Enter unique username or email",
+    "remember_device": "Remember this device",
+    "sign_up_free": "Sign up for free",
+    "forgot_password": "Forgot Password?",
+    "dont_have_account": "Don't have an account?"
+  },
+  "register": {
+    "welcome": "Welcome to Coronatime",
+    "enter_info": "Please enter required info to sign up",
+    "username_placeholder": "enter unique username",
+    "username_format": "Username should be unique, min 3 symbols",
+    "already_have_account": "Already have an account?"
+  },
+  "errors": {
+    "field_required": "This field is required",
+    "valid_email": "Please enter valid email",
+    "min_symbols": "Enter min {{symbols}} symbols",
+    "wrong_user": "There is no user with this username",
+    "wrong_password": "Password is incorrect",
+    "email_taken": "This email is already taken",
+    "username_taken": "This username is already taken",
+    "unknown_email": "There is no user with such email"
+  },
+  "reset_password": {
+    "title": "Reset Password",
+    "button_text": "RESET PASSWORD"
+  },
+  "pending": {
+    "password_updated": "Your password has been updated successfully",
+    "account_confirmed": "Your account is confirmed you can sign in",
+    "email_sent": "We have sent you a confirmation email"
+  },
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "repeat_password": "Repeat password",
+  "email_placeholder": "Enter your email",
+  "password_placeholder": "Fill in password",
+  "passwords_should_match": "Passwords should match",
+  "sign_up": "SIGN UP",
+  "log_in": "Log In",
+  "sign_in": "SIGN IN"
+}

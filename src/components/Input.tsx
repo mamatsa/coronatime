@@ -1,5 +1,6 @@
 import React from 'react';
 import { ErrorMark } from 'components/svg';
+import { useTranslation } from 'react-i18next';
 
 const Input: React.FC<{
   id: string;
@@ -14,8 +15,11 @@ const Input: React.FC<{
   errors?: any;
   isDirty?: boolean | undefined;
   tip?: string;
+  t?: string;
 }> = (props) => {
   const hasTip: boolean = !props.errors[props.name] && !props.isDirty;
+
+  const { t } = useTranslation();
 
   return (
     <div className={'flex flex-col'}>
@@ -29,18 +33,18 @@ const Input: React.FC<{
         {...props.register(props.name, {
           required: {
             value: props.required,
-            message: 'This field is required',
+            message: 'errors.field_required',
           },
 
           ...(props.name === 'email' && {
             pattern: {
               value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-              message: 'Please enter valid email',
+              message: 'errors.valid_email',
             },
           }),
           minLength: {
             value: props.minLength,
-            message: `Enter min ${props.minLength} symbols`,
+            message: 'errors.min_symbols',
           },
           validate: props.customValidation?.func,
         })}
@@ -60,9 +64,9 @@ const Input: React.FC<{
         {hasTip && props.tip}
         {(props.errors[props.name]?.message ||
           props.errors[props.name]?.type === 'validate') && <ErrorMark />}
-        {props.errors[props.name]?.message}
+        {t(props.errors[props.name]?.message, { symbols: props.minLength })}
         {props.errors[props.name]?.type === 'validate' &&
-          props.customValidation.message}
+          t(props.customValidation.message)}
       </p>
     </div>
   );

@@ -8,6 +8,8 @@ module.exports = {
         'main-green': '#0FBA68',
         'main-blue': '#2029F3',
         'text-dark': '#010414',
+        'light-gray': '#E6E6E7',
+        'border-gray': '#F6F6F7',
       },
       backgroundImage: {
         'input-success': "url('assets/images/Success.svg')",

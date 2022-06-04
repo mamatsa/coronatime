@@ -34,6 +34,11 @@
     "account_confirmed": "Your account is confirmed you can sign in",
     "email_sent": "We have sent you a confirmation email"
   },
+  "dashboard": {
+    "title": "Worldwide Statistics",
+    "worldwide": "Worldwide",
+    "by_country": "By Country"
+  },
   "username": "Username",
   "email": "Email",
   "password": "Password",
@@ -43,5 +48,6 @@
   "passwords_should_match": "Passwords should match",
   "sign_up": "SIGN UP",
   "log_in": "Log In",
-  "sign_in": "SIGN IN"
+  "sign_in": "SIGN IN",
+  "log_out": "Log Out"
 }

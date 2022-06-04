@@ -5,6 +5,7 @@ body {
   font-family: Inter;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #010414;
 }
 
 @tailwind base;

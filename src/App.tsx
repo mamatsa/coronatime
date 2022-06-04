@@ -7,6 +7,7 @@ import {
   Confirmation,
   RequestResetPassword,
   ResetPassword,
+  Dashboard,
 } from 'pages';
 import { Button } from 'components';
 
@@ -16,6 +17,8 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/' element={<Dashboard />} />
+        <Route path='/by-country' element={<Dashboard />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
 

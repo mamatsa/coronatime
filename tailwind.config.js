@@ -4,12 +4,17 @@ module.exports = {
     extend: {
       colors: {
         grayish: '#808189',
+        'text-dark': '#010414',
         'error-red': '#CC1E1E',
+        'border-gray': '#F6F6F7',
         'main-green': '#0FBA68',
         'main-blue': '#2029F3',
-        'text-dark': '#010414',
+        'main-purple': '#2029F3',
+        'main-yellow': '#EAD621',
+        'light-green': '#ecf9f3',
         'light-gray': '#E6E6E7',
-        'border-gray': '#F6F6F7',
+        'light-purple': '#edeeff',
+        'light-yellow': '#fdfced',
       },
       backgroundImage: {
         'input-success': "url('assets/images/Success.svg')",

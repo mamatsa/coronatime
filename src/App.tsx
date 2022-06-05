@@ -42,15 +42,33 @@ function App() {
           <>
             <Route
               path='/'
-              element={<Dashboard username={user} onLogout={logoutHandler} />}
+              element={
+                <Dashboard
+                  username={user}
+                  token={token}
+                  onLogout={logoutHandler}
+                />
+              }
             />
             <Route
               path='/by-country'
-              element={<Dashboard username={user} onLogout={logoutHandler} />}
+              element={
+                <Dashboard
+                  token={token}
+                  username={user}
+                  onLogout={logoutHandler}
+                />
+              }
             />
             <Route
               path='*'
-              element={<Dashboard username={user} onLogout={logoutHandler} />}
+              element={
+                <Dashboard
+                  token={token}
+                  username={user}
+                  onLogout={logoutHandler}
+                />
+              }
             />
           </>
         )}

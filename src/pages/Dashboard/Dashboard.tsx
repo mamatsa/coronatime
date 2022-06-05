@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
-import { Navbar } from 'pages/Dashboard/components';
-import { NewCasesLine, RecoveredLine, DeathLine } from 'components/svg';
+import { Navbar, StatisticSwitch } from 'pages/Dashboard/components';
+import {
+  NewCasesLine,
+  RecoveredLine,
+  DeathLine,
+} from 'pages/Dashboard/components/svg';
 
 const baseURL: string = 'https://coronatime-api.devtest.ge/api/countries';
 
@@ -56,50 +59,34 @@ const Dashboard: React.FC<{
       });
   }, [props.token]);
 
-  const activeClass = 'font-bold border-b-[3px] border-black pb-4';
-
   return (
-    <div className='  py-10 px-28'>
+    <div className=' py-4 px-6  md:py-10 md:px-28'>
       <Navbar username={props.username} onLogout={props.onLogout} />
       <h1 className=' font-bold text-[25px]'>{t('dashboard.title')}</h1>
-      <ul className='flex gap-8 mt-10'>
-        <li>
-          <NavLink
-            to='/'
-            className={({ isActive }) => (isActive ? activeClass : undefined)}
-          >
-            {t('dashboard.worldwide')}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/by-country'
-            className={({ isActive }) => (isActive ? activeClass : undefined)}
-          >
-            {t('dashboard.by_country')}
-          </NavLink>
-        </li>
-      </ul>
+      <StatisticSwitch />
+
       <div className='80vw h-px mt-4 bg-border-gray'></div>
-      <div className='flex gap-6 my-10'>
-        <div className='flex flex-col items-center justify-center gap-6 py-10 px-28 bg-light-purple w-2/6 rounded-2xl'>
+      <div className='flex flex-wrap gap-6 my-10 lg:flex-nowrap'>
+        <div className='flex flex-col items-center justify-center gap-6 w-full py-10 px-28 bg-light-purple rounded-2xl lg:w-1/3'>
           <NewCasesLine />
-          <p className=' text-xl whitespace-nowrap font-medium'>New cases</p>
-          <p className=' text-main-purple font-black text-[39px]'>
+          <p className=' whitespace-nowrap font-medium  md:text-xl'>
+            {t('dashboard.new_cases')}
+          </p>
+          <p className=' text-main-purple font-black text-[25px] md:text-[39px]'>
             {statistics?.confirmed.toLocaleString()}
           </p>
         </div>
-        <div className='flex flex-col items-center justify-center gap-6 py-10 px-28 bg-light-green w-2/6  rounded-2xl'>
+        <div className='flex flex-col items-center justify-center gap-6 w-full py-10 px-28 bg-light-green rounded-2xl lg:w-1/3 '>
           <RecoveredLine />
-          <p className=' text-xl font-medium'>Recovered</p>
-          <p className=' text-main-green font-black text-[39px]'>
+          <p className='font-medium  md:text-xl'>{t('dashboard.recovered')}</p>
+          <p className=' text-main-green font-black text-[25px] md:text-[39px]'>
             {statistics?.recovered.toLocaleString()}
           </p>
         </div>
-        <div className='flex flex-col items-center justify-center gap-6 py-10 px-28 bg-light-yellow w-2/6  rounded-2xl'>
+        <div className='flex flex-col items-center justify-center gap-6 w-full py-10 px-28 bg-light-yellow rounded-2xl lg:w-1/3'>
           <DeathLine />
-          <p className=' text-xl font-medium'>Deaths</p>
-          <p className=' text-main-yellow font-black text-[39px]'>
+          <p className='font-medium md:text-xl'>{t('dashboard.deaths')}</p>
+          <p className=' text-main-yellow font-black text-[25px] md:text-[39px]'>
             {statistics?.deaths.toLocaleString()}
           </p>
         </div>

@@ -35,7 +35,8 @@
     "email_sent": "We have sent you a confirmation email"
   },
   "dashboard": {
-    "title": "Worldwide Statistics",
+    "worldwide_title": "Worldwide Statistics",
+    "country_title": "Statistics by country",
     "worldwide": "Worldwide",
     "by_country": "By Country",
     "new_cases": "New cases",

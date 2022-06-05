@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { Navbar, StatisticSwitch } from 'pages/Dashboard/components';
-import {
-  NewCasesLine,
-  RecoveredLine,
-  DeathLine,
-} from 'pages/Dashboard/components/svg';
+import { WorldwideStatistics } from './components';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Select, SelectChosen } from './components/svg';
 
 const baseURL: string = 'https://coronatime-api.devtest.ge/api/countries';
 
@@ -16,15 +14,21 @@ type Statistics = {
   deaths: number;
 };
 
+let prevSortOption: string = 'location';
+
 const Dashboard: React.FC<{
   username: string | null;
   token: string;
   onLogout: () => void;
 }> = (props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const language = i18n.language === 'geo' ? 'ka' : 'en';
 
   const [statistics, setStatistics] = useState<Statistics>();
+  const [countries, setCountries] = useState<any>();
 
+  // calculate worldwide statistics
   const countStatistics = (data: any) => {
     let totalConfirmed: number = 0;
     let totalRecovered: number = 0;
@@ -42,7 +46,8 @@ const Dashboard: React.FC<{
     });
   };
 
-  React.useEffect(() => {
+  // fetch countries list
+  useEffect(() => {
     axios
       .get(baseURL, {
         headers: {
@@ -52,6 +57,7 @@ const Dashboard: React.FC<{
       })
       .then((response) => {
         countStatistics(response.data);
+        setCountries(response.data);
       })
       .catch((error) => {
         console.log(props.token);
@@ -59,38 +65,141 @@ const Dashboard: React.FC<{
       });
   }, [props.token]);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // get url search parameter for sorting
+  const queryParams = new URLSearchParams(location.search);
+  const sortOption = queryParams.get('sort') || 'location';
+
+  // sort if sort param changes in url search params
+  if (countries && prevSortOption !== sortOption) {
+    prevSortOption = sortOption;
+    switch (sortOption) {
+      case 'cases':
+        setCountries((prevState: any) => {
+          return prevState.sort(
+            (a: any, b: any) => b.statistics.confirmed - a.statistics.confirmed
+          );
+        });
+        break;
+      case 'deaths':
+        setCountries((prevState: any) => {
+          return prevState.sort(
+            (a: any, b: any) => b.statistics.deaths - a.statistics.deaths
+          );
+        });
+        break;
+      case 'recovered':
+        setCountries((prevState: any) => {
+          return prevState.sort(
+            (a: any, b: any) => b.statistics.recovered - a.statistics.recovered
+          );
+        });
+        break;
+      case 'location':
+        setCountries((prevState: any) => {
+          return prevState.sort((a: any, b: any) =>
+            a.name[language] > b.name[language] ? 1 : -1
+          );
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  // check what kind of statistics user want to see
+  const isWorldwide: boolean = location.pathname === '/';
+
+  // add search param on url on sort option choose
+  const sortOptionClickHandler = (option: string) => {
+    navigate(`${location.pathname}?sort=${option}`);
+  };
+
   return (
     <div className=' py-4 px-6  md:py-10 md:px-28'>
       <Navbar username={props.username} onLogout={props.onLogout} />
-      <h1 className=' font-bold text-[25px]'>{t('dashboard.title')}</h1>
+      <h1 className=' font-bold text-[25px]'>
+        {isWorldwide
+          ? t('dashboard.worldwide_title')
+          : t('dashboard.country_title')}
+      </h1>
       <StatisticSwitch />
 
       <div className='80vw h-px mt-4 bg-border-gray'></div>
-      <div className='flex flex-wrap gap-6 my-10 lg:flex-nowrap'>
-        <div className='flex flex-col items-center justify-center gap-6 w-full py-10 px-28 bg-light-purple rounded-2xl lg:w-1/3'>
-          <NewCasesLine />
-          <p className=' whitespace-nowrap font-medium  md:text-xl'>
-            {t('dashboard.new_cases')}
-          </p>
-          <p className=' text-main-purple font-black text-[25px] md:text-[39px]'>
-            {statistics?.confirmed.toLocaleString()}
-          </p>
-        </div>
-        <div className='flex flex-col items-center justify-center gap-6 w-full py-10 px-28 bg-light-green rounded-2xl lg:w-1/3 '>
-          <RecoveredLine />
-          <p className='font-medium  md:text-xl'>{t('dashboard.recovered')}</p>
-          <p className=' text-main-green font-black text-[25px] md:text-[39px]'>
-            {statistics?.recovered.toLocaleString()}
-          </p>
-        </div>
-        <div className='flex flex-col items-center justify-center gap-6 w-full py-10 px-28 bg-light-yellow rounded-2xl lg:w-1/3'>
-          <DeathLine />
-          <p className='font-medium md:text-xl'>{t('dashboard.deaths')}</p>
-          <p className=' text-main-yellow font-black text-[25px] md:text-[39px]'>
-            {statistics?.deaths.toLocaleString()}
-          </p>
-        </div>
-      </div>
+
+      {statistics && isWorldwide && (
+        <WorldwideStatistics statistics={statistics} />
+      )}
+
+      {!isWorldwide && countries && (
+        <table className=' mt-5 w-full text-sm text-left border border-border-gray text-gray-500'>
+          <thead className='text-xs text-gray-700 uppercase bg-border-gray'>
+            <tr>
+              <th scope='col' className='px-6 py-5'>
+                <div
+                  className='flex items-center gap-2 cursor-pointer'
+                  onClick={() => {
+                    sortOptionClickHandler('location');
+                  }}
+                >
+                  Location
+                  {sortOption === 'location' ? <SelectChosen /> : <Select />}
+                </div>
+              </th>
+              <th scope='col' className='px-6 py-5  items-center gap-2'>
+                <div
+                  className=' flex items-center gap-2 cursor-pointer'
+                  onClick={() => {
+                    sortOptionClickHandler('cases');
+                  }}
+                >
+                  New cases
+                  {sortOption === 'cases' ? <SelectChosen /> : <Select />}
+                </div>
+              </th>
+              <th scope='col' className='px-6 py-5'>
+                <div
+                  className=' flex items-center gap-2 cursor-pointer'
+                  onClick={() => {
+                    sortOptionClickHandler('deaths');
+                  }}
+                >
+                  Deaths
+                  {sortOption === 'deaths' ? <SelectChosen /> : <Select />}
+                </div>
+              </th>
+              <th scope='col' className='px-6 py-5'>
+                <div
+                  className=' flex items-center gap-2 cursor-pointer'
+                  onClick={() => {
+                    sortOptionClickHandler('recovered');
+                  }}
+                >
+                  Recovered
+                  {sortOption === 'recovered' ? <SelectChosen /> : <Select />}
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {countries.map((country: any) => {
+              return (
+                <tr
+                  key={country['_id']}
+                  className=' border-b border-border-gray hover:bg-gray-50'
+                >
+                  <td className='px-6 py-4'>{country.name[language]}</td>
+                  <td className='px-6 py-4'>{country.statistics.confirmed}</td>
+                  <td className='px-6 py-4'>{country.statistics.deaths}</td>
+                  <td className='px-6 py-4'>{country.statistics.recovered}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

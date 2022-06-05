@@ -18,6 +18,7 @@ module.exports = {
       },
       backgroundImage: {
         'input-success': "url('assets/images/Success.svg')",
+        'input-search': "url('assets/images/Search.svg')",
       },
     },
     fontFamily: {

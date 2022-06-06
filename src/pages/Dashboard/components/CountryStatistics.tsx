@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Select, SelectChosen } from 'pages/Dashboard/components/svg';
+import { t } from 'i18next';
 
 let prevSortOption: string = 'location';
 
@@ -83,61 +84,72 @@ const CountryStatistics: React.FC<{ countries: any }> = (props) => {
   }, [searchText, language, countries]);
 
   return (
-    <>
+    <div className=' flex flex-col items-center'>
       <input
         type='text'
         placeholder='Search by country'
-        className=' py-4 pr-4 pl-14 my-8 border border-light-gray rounded-lg text-sm bg-input-search bg-no-repeat bg-[center_left_1.2rem]'
+        className=' py-3 pl-14 mb-2 mt-6 border border-light-gray rounded-lg text-xs bg-input-search bg-no-repeat bg-[center_left_1.2rem] md:my-8 md:text-base md:py-4 self-start'
         value={searchText}
         onChange={(e) => {
           setSearchText(e.target.value.toLowerCase());
         }}
       />
-      <table className=' mt-5 w-full text-sm text-left border border-border-gray text-gray-500'>
-        <thead className='text-xs text-gray-700 uppercase bg-border-gray'>
+      <table className=' mt-5 w-full text-sm text-left border border-border-gray text-gray-500 -mx-5'>
+        <thead className='text-[8px] md:text-sm text-gray-700 uppercase bg-border-gray'>
           <tr>
-            <th scope='col' className='px-6 py-5'>
+            <th scope='col' className=' px-0.5 md:px-6 py-5'>
               <div
-                className='flex items-center gap-2 cursor-pointer'
+                className='flex items-center gap-1 md:gap-2 cursor-pointer'
                 onClick={() => {
                   sortOptionClickHandler('location');
                 }}
               >
-                Location
-                {sortOption === 'location' ? <SelectChosen /> : <Select />}
+                <>
+                  {t('dashboard.location')}
+                  {sortOption === 'location' ? <SelectChosen /> : <Select />}
+                </>
               </div>
             </th>
-            <th scope='col' className='px-6 py-5  items-center gap-2'>
+            <th
+              scope='col'
+              className=' px-0.5 md:px-6 py-5  items-center gap-2'
+            >
               <div
-                className=' flex items-center gap-2 cursor-pointer'
+                className=' flex items-center gap-1 md:gap-2 cursor-pointer'
                 onClick={() => {
                   sortOptionClickHandler('cases');
                 }}
               >
-                New cases
-                {sortOption === 'cases' ? <SelectChosen /> : <Select />}
+                <>
+                  {t('dashboard.new_cases')}
+                  {sortOption === 'cases' ? <SelectChosen /> : <Select />}
+                </>
               </div>
             </th>
-            <th scope='col' className='px-6 py-5'>
+            <th scope='col' className=' px-0.5 md:px-6 py-5'>
               <div
-                className=' flex items-center gap-2 cursor-pointer'
+                className=' flex items-center gap-1 md:gap-2 cursor-pointer'
                 onClick={() => {
                   sortOptionClickHandler('deaths');
                 }}
               >
-                Deaths
-                {sortOption === 'deaths' ? <SelectChosen /> : <Select />}
+                <>
+                  {t('dashboard.deaths')}
+                  {sortOption === 'deaths' ? <SelectChosen /> : <Select />}
+                </>
               </div>
             </th>
-            <th scope='col' className='px-6 py-5'>
+            <th scope='col' className=' px-0.5 md:px-6 py-5'>
               <div
-                className=' flex items-center gap-2 cursor-pointer'
+                className=' flex items-center gap-1 md:gap-2 cursor-pointer'
                 onClick={() => {
                   sortOptionClickHandler('recovered');
                 }}
               >
-                Recovered
-                {sortOption === 'recovered' ? <SelectChosen /> : <Select />}
+                <>
+                  {t('dashboard.recovered')}
+                  {sortOption === 'recovered' ? <SelectChosen /> : <Select />}
+                </>
               </div>
             </th>
           </tr>
@@ -149,16 +161,24 @@ const CountryStatistics: React.FC<{ countries: any }> = (props) => {
                 key={country['_id']}
                 className=' border-b border-border-gray hover:bg-gray-50'
               >
-                <td className='px-6 py-4'>{country.name[language]}</td>
-                <td className='px-6 py-4'>{country.statistics.confirmed}</td>
-                <td className='px-6 py-4'>{country.statistics.deaths}</td>
-                <td className='px-6 py-4'>{country.statistics.recovered}</td>
+                <td className='px-1 md:px-6 py-4 text-xs md:text-base'>
+                  {country.name[language]}
+                </td>
+                <td className='px-1 md:px-6  py-4 text-xs md:text-base'>
+                  {country.statistics.confirmed}
+                </td>
+                <td className='px-1 md:px-6  py-4 text-xs md:text-base'>
+                  {country.statistics.deaths}
+                </td>
+                <td className='px-1 md:px-6  py-4 text-xs md:text-base'>
+                  {country.statistics.recovered}
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

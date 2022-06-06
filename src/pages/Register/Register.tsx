@@ -16,7 +16,7 @@ type FormInputs = {
 const baseURL: string = 'https://coronatime-api.devtest.ge/api/register';
 
 const Register = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const {
     register,

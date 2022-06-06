@@ -3,6 +3,7 @@ import React from 'react';
 const Select = () => {
   return (
     <svg
+      className='w-3 md:w-4'
       width='16'
       height='24'
       viewBox='0 0 16 24'

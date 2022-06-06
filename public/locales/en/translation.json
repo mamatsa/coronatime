@@ -41,7 +41,8 @@
     "by_country": "By Country",
     "new_cases": "New cases",
     "recovered": "Recovered",
-    "deaths": "Deaths"
+    "deaths": "Deaths",
+    "location": "Location"
   },
   "username": "Username",
   "email": "Email",

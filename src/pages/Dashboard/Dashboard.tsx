@@ -67,7 +67,7 @@ const Dashboard: React.FC<{
   const isWorldwide: boolean = location.pathname === '/';
 
   return (
-    <div className=' py-4 px-6  md:py-10 md:px-28'>
+    <div className=' py-4 px-2 md:py-10 sm:px-6 lg:px-20 xl:px-28'>
       <Navbar username={props.username} onLogout={props.onLogout} />
       <h1 className=' font-bold text-[25px]'>
         {isWorldwide

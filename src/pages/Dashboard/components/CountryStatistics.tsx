@@ -114,112 +114,111 @@ const CountryStatistics: React.FC<{
       <input
         type='text'
         placeholder='Search by country'
-        className=' py-3 pl-14 mb-2 mt-6 border border-light-gray rounded-lg text-xs bg-input-search bg-no-repeat bg-[center_left_1.2rem] md:my-8 md:text-base md:py-4 self-start'
+        className=' self-start py-3 pl-14 my-6 border border-light-gray rounded-lg text-xs bg-input-search bg-no-repeat bg-[center_left_1.2rem] md:my-8 md:text-base md:py-4'
         value={searchText}
         onChange={(e) => {
           setSearchText(e.target.value.trim().toLowerCase());
         }}
       />
-      <table className=' mt-5 w-full text-sm text-left border border-border-gray text-gray-500 -mx-5'>
-        <thead className='text-[8px] md:text-sm text-gray-700 uppercase bg-border-gray'>
-          <tr>
-            <th scope='col' className=' px-0.5 md:px-6 py-5'>
-              <div
-                className='flex items-center gap-1 md:gap-2 cursor-pointer'
-                onClick={() => {
-                  sortOptionClickHandler('location');
-                }}
-              >
-                <>
-                  {t('dashboard.location')}
-                  {sortOption === 'location' ? (
-                    <SelectOption order={sortOrder} />
-                  ) : (
-                    <SelectOption />
-                  )}
-                </>
-              </div>
-            </th>
-            <th
-              scope='col'
-              className=' px-0.5 md:px-6 py-5  items-center gap-2'
-            >
-              <div
-                className=' flex items-center gap-1 md:gap-2 cursor-pointer'
-                onClick={() => {
-                  sortOptionClickHandler('cases');
-                }}
-              >
-                <>
-                  {t('dashboard.new_cases')}
-                  {sortOption === 'cases' ? (
-                    <SelectOption order={sortOrder} />
-                  ) : (
-                    <SelectOption />
-                  )}
-                </>
-              </div>
-            </th>
-            <th scope='col' className=' px-0.5 md:px-6 py-5'>
-              <div
-                className=' flex items-center gap-1 md:gap-2 cursor-pointer'
-                onClick={() => {
-                  sortOptionClickHandler('deaths');
-                }}
-              >
-                <>
-                  {t('dashboard.deaths')}
-                  {sortOption === 'deaths' ? (
-                    <SelectOption order={sortOrder} />
-                  ) : (
-                    <SelectOption />
-                  )}
-                </>
-              </div>
-            </th>
-            <th scope='col' className=' px-0.5 md:px-6 py-5'>
-              <div
-                className=' flex items-center gap-1 md:gap-2 cursor-pointer'
-                onClick={() => {
-                  sortOptionClickHandler('recovered');
-                }}
-              >
-                <>
-                  {t('dashboard.recovered')}
-                  {sortOption === 'recovered' ? (
-                    <SelectOption order={sortOrder} />
-                  ) : (
-                    <SelectOption />
-                  )}
-                </>
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredCountries.map((country: any) => {
-            return (
-              <tr
-                key={country['_id']}
-                className=' border-b border-border-gray hover:bg-gray-50'
-              >
-                <td className='px-1 md:px-6 py-4 text-xs md:text-base'>
-                  {country.name[language]}
-                </td>
-                <td className='px-1 md:px-6  py-4 text-xs md:text-base'>
-                  {country.statistics.confirmed}
-                </td>
-                <td className='px-1 md:px-6  py-4 text-xs md:text-base'>
-                  {country.statistics.deaths}
-                </td>
-                <td className='px-1 md:px-6  py-4 text-xs md:text-base'>
-                  {country.statistics.recovered}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className='w-full border rounded-lg overflow-hidden h-[calc(100vh-22rem)] md:h-[calc(100vh-28rem)]'>
+        <table className='table-auto w-full h-full'>
+          <thead className='bg-border-gray'>
+            <tr className=' py-4 w-full h-full flex text-[8px] md:text-sm'>
+              <th scope='col' className=' w-1/4 pl-1 md:pl-4 lg:pl-10'>
+                <div
+                  className='flex items-center justify-center flex-col gap-1 cursor-pointer sm:flex-row sm:justify-start md:gap-2 '
+                  onClick={() => {
+                    sortOptionClickHandler('location');
+                  }}
+                >
+                  <>
+                    {t('dashboard.location')}
+                    {sortOption === 'location' ? (
+                      <SelectOption order={sortOrder} />
+                    ) : (
+                      <SelectOption />
+                    )}
+                  </>
+                </div>
+              </th>
+              <th scope='col' className='w-1/4'>
+                <div
+                  className=' flex items-center justify-center flex-col gap-1 cursor-pointer sm:flex-row sm:justify-start  md:gap-2 '
+                  onClick={() => {
+                    sortOptionClickHandler('cases');
+                  }}
+                >
+                  <>
+                    {t('dashboard.new_cases')}
+                    {sortOption === 'cases' ? (
+                      <SelectOption order={sortOrder} />
+                    ) : (
+                      <SelectOption />
+                    )}
+                  </>
+                </div>
+              </th>
+              <th scope='col' className=' w-1/4'>
+                <div
+                  className=' flex items-center justify-center flex-col gap-1  cursor-pointer sm:flex-row sm:justify-start  md:gap-2 '
+                  onClick={() => {
+                    sortOptionClickHandler('deaths');
+                  }}
+                >
+                  <>
+                    {t('dashboard.deaths')}
+                    {sortOption === 'deaths' ? (
+                      <SelectOption order={sortOrder} />
+                    ) : (
+                      <SelectOption />
+                    )}
+                  </>
+                </div>
+              </th>
+              <th scope='col' className=' w-1/4 pr-1 md:pr-4'>
+                <div
+                  className=' flex items-center justify-center flex-col gap-1  cursor-pointer sm:flex-row sm:justify-start md:gap-2 '
+                  onClick={() => {
+                    sortOptionClickHandler('recovered');
+                  }}
+                >
+                  <>
+                    {t('dashboard.recovered')}
+                    {sortOption === 'recovered' ? (
+                      <SelectOption order={sortOrder} />
+                    ) : (
+                      <SelectOption />
+                    )}
+                  </>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody className=' block h-full overflow-y-scroll'>
+            {filteredCountries.map((country: any) => {
+              return (
+                <tr
+                  key={country['_id']}
+                  className=' w-full flex items-center border-b border-border-gray hover:bg-gray-50'
+                >
+                  <td className='w-1/4 px-2 py-4 text-[8px] text-center sm:text-left md:px-5 md:text-base lg:pl-10'>
+                    {country.name[language]}
+                  </td>
+                  <td className='w-1/4  px-2 py-4 text-[10px] text-center sm:text-left md:text-base'>
+                    {country.statistics.confirmed}
+                  </td>
+                  <td className='w-1/4 px-2 my-4 text-[10px] text-center sm:text-left md:text-base'>
+                    {country.statistics.deaths}
+                  </td>
+                  <td className='w-1/4 px-3 py-4 text-[10px] text-center sm:text-left md:text-base'>
+                    {country.statistics.recovered}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

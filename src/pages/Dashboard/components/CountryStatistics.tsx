@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Select, SelectChosen } from 'pages/Dashboard/components/svg';
+import { SelectOption } from 'pages/Dashboard/components/svg';
 import { t } from 'i18next';
 
 // helps to find out if sort option have changed
 let prevSortOption: string = 'location';
+let prevSortOrder: string = 'desc';
 
 const CountryStatistics: React.FC<{
   countries: any;
 }> = (props) => {
+  console.log(1);
   const { i18n } = useTranslation();
   const language = i18n.language === 'geo' ? 'ka' : 'en';
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [countries] = useState<any>(props.countries);
   const [filteredCountries, setFilteredCountries] = useState<any>(
@@ -19,48 +23,64 @@ const CountryStatistics: React.FC<{
   );
   const [searchText, setSearchText] = useState<string>('');
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  // get url search parameter for sorting
+  const sortOption = searchParams.get('sort') || 'location';
+  const sortOrder = searchParams.get('order') || 'asc';
 
   // add parameter on url when user chooses sort option
   const sortOptionClickHandler = (option: string) => {
-    navigate(`${location.pathname}?sort=${option}`);
+    if (searchParams.get('sort') === option && sortOrder === 'desc') {
+      setSearchParams({ sort: option, order: 'asc' });
+    } else if (sortOption === option) {
+      setSearchParams({ sort: option, order: 'desc' });
+    } else {
+      setSearchParams({ sort: option });
+    }
   };
 
-  // get url search parameter for sorting
-  const queryParams = new URLSearchParams(location.search);
-  const sortOption = queryParams.get('sort') || 'location';
-
   // sort if url sort param changes
-  if (countries && prevSortOption !== sortOption) {
+  if (
+    countries &&
+    (prevSortOption !== sortOption || prevSortOrder !== sortOrder)
+  ) {
     prevSortOption = sortOption;
+    prevSortOrder = sortOrder;
     switch (sortOption) {
       case 'cases':
         setFilteredCountries((prevState: any) => {
-          return prevState.sort(
-            (a: any, b: any) => b.statistics.confirmed - a.statistics.confirmed
-          );
+          return prevState.sort((a: any, b: any) => {
+            if (sortOrder === 'asc')
+              return a.statistics.confirmed - b.statistics.confirmed;
+            return b.statistics.confirmed - a.statistics.confirmed;
+          });
         });
         break;
       case 'deaths':
         setFilteredCountries((prevState: any) => {
-          return prevState.sort(
-            (a: any, b: any) => b.statistics.deaths - a.statistics.deaths
-          );
+          return prevState.sort((a: any, b: any) => {
+            if (sortOrder === 'asc')
+              return a.statistics.deaths - b.statistics.deaths;
+            return b.statistics.deaths - a.statistics.deaths;
+          });
         });
         break;
       case 'recovered':
         setFilteredCountries((prevState: any) => {
-          return prevState.sort(
-            (a: any, b: any) => b.statistics.recovered - a.statistics.recovered
-          );
+          return prevState.sort((a: any, b: any) => {
+            if (sortOrder === 'asc')
+              return a.statistics.recovered - b.statistics.recovered;
+            return b.statistics.recovered - a.statistics.recovered;
+          });
         });
         break;
       case 'location':
         setFilteredCountries((prevState: any) => {
-          return prevState.sort((a: any, b: any) =>
-            a.name[language] > b.name[language] ? 1 : -1
-          );
+          return prevState.sort((a: any, b: any) => {
+            if (sortOrder === 'asc')
+              return a.name[language] > b.name[language] ? 1 : -1;
+
+            return a.name[language] < b.name[language] ? 1 : -1;
+          });
         });
         break;
       default:
@@ -112,7 +132,11 @@ const CountryStatistics: React.FC<{
               >
                 <>
                   {t('dashboard.location')}
-                  {sortOption === 'location' ? <SelectChosen /> : <Select />}
+                  {sortOption === 'location' ? (
+                    <SelectOption order={sortOrder} />
+                  ) : (
+                    <SelectOption />
+                  )}
                 </>
               </div>
             </th>
@@ -128,7 +152,11 @@ const CountryStatistics: React.FC<{
               >
                 <>
                   {t('dashboard.new_cases')}
-                  {sortOption === 'cases' ? <SelectChosen /> : <Select />}
+                  {sortOption === 'cases' ? (
+                    <SelectOption order={sortOrder} />
+                  ) : (
+                    <SelectOption />
+                  )}
                 </>
               </div>
             </th>
@@ -141,7 +169,11 @@ const CountryStatistics: React.FC<{
               >
                 <>
                   {t('dashboard.deaths')}
-                  {sortOption === 'deaths' ? <SelectChosen /> : <Select />}
+                  {sortOption === 'deaths' ? (
+                    <SelectOption order={sortOrder} />
+                  ) : (
+                    <SelectOption />
+                  )}
                 </>
               </div>
             </th>
@@ -154,7 +186,11 @@ const CountryStatistics: React.FC<{
               >
                 <>
                   {t('dashboard.recovered')}
-                  {sortOption === 'recovered' ? <SelectChosen /> : <Select />}
+                  {sortOption === 'recovered' ? (
+                    <SelectOption order={sortOrder} />
+                  ) : (
+                    <SelectOption />
+                  )}
                 </>
               </div>
             </th>

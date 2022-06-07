@@ -4,9 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { Select, SelectChosen } from 'pages/Dashboard/components/svg';
 import { t } from 'i18next';
 
+// helps to find out if sort option have changed
 let prevSortOption: string = 'location';
 
-const CountryStatistics: React.FC<{ countries: any }> = (props) => {
+const CountryStatistics: React.FC<{
+  countries: any;
+}> = (props) => {
   const { i18n } = useTranslation();
   const language = i18n.language === 'geo' ? 'ka' : 'en';
 
@@ -18,7 +21,8 @@ const CountryStatistics: React.FC<{ countries: any }> = (props) => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  // add search param on url on sort option choose
+
+  // add parameter on url when user chooses sort option
   const sortOptionClickHandler = (option: string) => {
     navigate(`${location.pathname}?sort=${option}`);
   };
@@ -27,7 +31,7 @@ const CountryStatistics: React.FC<{ countries: any }> = (props) => {
   const queryParams = new URLSearchParams(location.search);
   const sortOption = queryParams.get('sort') || 'location';
 
-  // sort if sort param changes in url search params
+  // sort if url sort param changes
   if (countries && prevSortOption !== sortOption) {
     prevSortOption = sortOption;
     switch (sortOption) {
@@ -81,6 +85,8 @@ const CountryStatistics: React.FC<{ countries: any }> = (props) => {
     } else {
       setFilteredCountries(countries);
     }
+    // Causes resorting, because otherwise on search word change previous sort option would be lost
+    prevSortOption = '';
   }, [searchText, language, countries]);
 
   return (
@@ -91,7 +97,7 @@ const CountryStatistics: React.FC<{ countries: any }> = (props) => {
         className=' py-3 pl-14 mb-2 mt-6 border border-light-gray rounded-lg text-xs bg-input-search bg-no-repeat bg-[center_left_1.2rem] md:my-8 md:text-base md:py-4 self-start'
         value={searchText}
         onChange={(e) => {
-          setSearchText(e.target.value.toLowerCase());
+          setSearchText(e.target.value.trim().toLowerCase());
         }}
       />
       <table className=' mt-5 w-full text-sm text-left border border-border-gray text-gray-500 -mx-5'>

@@ -82,11 +82,7 @@ const Dashboard: React.FC<{
         <WorldwideStatistics statistics={statistics} />
       )}
 
-      {!isWorldwide && countries && (
-        <>
-          <CountryStatistics countries={countries} />
-        </>
-      )}
+      {!isWorldwide && countries && <CountryStatistics countries={countries} />}
     </div>
   );
 };

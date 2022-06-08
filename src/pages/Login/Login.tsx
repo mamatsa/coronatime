@@ -45,6 +45,7 @@ const Login: React.FC<{
       })
       .catch((error) => {
         const response = error.response;
+        /* istanbul ignore else */
         if (response.status === 422) {
           setError('username', {
             type: 'custom',
@@ -66,7 +67,9 @@ const Login: React.FC<{
     <div className=' flex flex-row justify-between'>
       <div className=' px-5 py-10 w-full md:px-28 md:w-3/4 2xl:w-2/5'>
         <AuthNavbar />
-        <h2 className=' font-black text-2xl mt-16'>{t('login.welcome')}</h2>
+        <h2 className=' font-black text-2xl mt-16' id='loginWelcome'>
+          {t('login.welcome')}
+        </h2>
         <p className=' text-xl text-grayish my-4'>{t('login.enter_info')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
@@ -111,15 +114,16 @@ const Login: React.FC<{
             <Link
               to='/password'
               className=' text-sm text-main-blue font-semibold'
+              id='loginForgotPassword'
             >
               {t('login.forgot_password')}
             </Link>
           </div>
-          <Button text={t('log_in')} />
+          <Button text={t('log_in')} id='loginSubmit' />
         </form>
         <div className='w-full flex justify-center items-center gap-2 my-6 '>
           <p className=' text-grayish'>{t('login.dont_have_account')}</p>
-          <Link to='/register' className='font-bold'>
+          <Link to='/register' className='font-bold' id='loginGoToRegister'>
             {t('login.sign_up_free')}
           </Link>
         </div>

@@ -76,14 +76,13 @@ const CountryStatistics: React.FC<{
       case 'location':
         setFilteredCountries((prevState: any) => {
           return prevState.sort((a: any, b: any) => {
+            /* istanbul ignore else */
             if (sortOrder === 'asc')
               return a.name[language] > b.name[language] ? 1 : -1;
-
+            /* istanbul ignore next */
             return a.name[language] < b.name[language] ? 1 : -1;
           });
         });
-        break;
-      default:
         break;
     }
   }
@@ -115,6 +114,7 @@ const CountryStatistics: React.FC<{
         type='text'
         placeholder='Search by country'
         className=' self-start py-3 pl-14 my-6 border border-light-gray rounded-lg text-xs bg-input-search bg-no-repeat bg-[center_left_1.2rem] md:my-8 md:text-base md:py-4'
+        id='dashboardSearch'
         value={searchText}
         onChange={(e) => {
           setSearchText(e.target.value.trim().toLowerCase());
@@ -127,6 +127,7 @@ const CountryStatistics: React.FC<{
               <th scope='col' className=' w-1/4 pl-1 md:pl-4 lg:pl-10'>
                 <div
                   className='flex items-center justify-center flex-col gap-1 cursor-pointer sm:flex-row sm:justify-start md:gap-2 '
+                  id='sortByLocation'
                   onClick={() => {
                     sortOptionClickHandler('location');
                   }}
@@ -144,6 +145,7 @@ const CountryStatistics: React.FC<{
               <th scope='col' className='w-1/4'>
                 <div
                   className=' flex items-center justify-center flex-col gap-1 cursor-pointer sm:flex-row sm:justify-start  md:gap-2 '
+                  id='sortByCases'
                   onClick={() => {
                     sortOptionClickHandler('cases');
                   }}
@@ -161,6 +163,7 @@ const CountryStatistics: React.FC<{
               <th scope='col' className=' w-1/4'>
                 <div
                   className=' flex items-center justify-center flex-col gap-1  cursor-pointer sm:flex-row sm:justify-start  md:gap-2 '
+                  id='sortByDeaths'
                   onClick={() => {
                     sortOptionClickHandler('deaths');
                   }}
@@ -178,6 +181,7 @@ const CountryStatistics: React.FC<{
               <th scope='col' className=' w-1/4 pr-1 md:pr-4'>
                 <div
                   className=' flex items-center justify-center flex-col gap-1  cursor-pointer sm:flex-row sm:justify-start md:gap-2 '
+                  id='sortByRecovered'
                   onClick={() => {
                     sortOptionClickHandler('recovered');
                   }}

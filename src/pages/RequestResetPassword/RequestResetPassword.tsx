@@ -60,7 +60,10 @@ const RequestResetPassword = () => {
             errors={errors}
             isDirty={dirtyFields.email}
           />
-          <Button text={t('reset_password.button_text')} />
+          <Button
+            text={t('reset_password.button_text')}
+            id='requestResetPasswordButton'
+          />
         </form>
       </div>
     </div>

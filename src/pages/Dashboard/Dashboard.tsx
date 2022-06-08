@@ -54,10 +54,6 @@ const Dashboard: React.FC<{
       .then((response) => {
         countStatistics(response.data);
         setCountries(response.data);
-      })
-      .catch((error) => {
-        console.log(props.token);
-        console.log(error);
       });
   }, [props.token]);
 

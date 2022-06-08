@@ -12,7 +12,7 @@ const LanguageChanger: React.FC<{ dashboard?: boolean }> = (props) => {
   return (
     <select
       name='language'
-      id='language'
+      id='languageChanger'
       className={className}
       value={i18n.language}
       onChange={(e) => {

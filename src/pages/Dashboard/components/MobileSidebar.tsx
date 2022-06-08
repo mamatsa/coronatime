@@ -15,6 +15,7 @@ const MobileSidebar: React.FC<Sidebar> = (props) => {
     <>
       <div
         onClick={props.onSidebarClose}
+        id='mobileNavBackdrop'
         className='absolute bottom-0 right-0 left-0 top-0 backdrop-blur-sm backdrop-brightness-125 backdrop-opacity-80 cursor-pointer '
       ></div>
       <ul className='absolute right-0 bottom-0 top-0 bg-light-gray w-2/5 flex py-9 flex-col justify-between items-center'>
@@ -26,6 +27,7 @@ const MobileSidebar: React.FC<Sidebar> = (props) => {
           <Link
             to='/login'
             onClick={props.onLogout}
+            id='mobileNavLogout'
             className=' text-lg font-medium border border-white py-2 px-4 rounded-2xl text-slate-900'
           >
             {t('log_out')}

@@ -71,7 +71,9 @@ const Register = () => {
     <div className=' flex flex-row justify-between'>
       <div className=' px-5 md:px-28 py-10 w-full md:w-3/4 2xl:w-2/5 '>
         <AuthNavbar />
-        <h2 className=' font-black text-2xl mt-16'>{t('register.welcome')}</h2>
+        <h2 className=' font-black text-2xl mt-16' id='registerWelcome'>
+          {t('register.welcome')}
+        </h2>
         <p className=' text-xl text-grayish my-4'>{t('register.enter_info')}</p>
         <form onSubmit={handleSubmit(onSubmit)} className=' space-y-2'>
           <Input
@@ -130,11 +132,11 @@ const Register = () => {
               message: t('passwords_should_match'),
             }}
           />
-          <Button text={t('sign_up')} />
+          <Button text={t('sign_up')} id='registerSubmit' />
         </form>
         <div className='w-full flex justify-center items-center gap-2 my-6 '>
           <p className=' text-grayish'>{t('register.already_have_account')}</p>
-          <Link to='/login' className='font-bold'>
+          <Link to='/login' className='font-bold' id='registerToLoginLink'>
             {t('log_in')}
           </Link>
         </div>

@@ -18,5 +18,5 @@
     "baseUrl": "src",
     "types": ["cypress", "node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["src", "**/*.ts"]
 }

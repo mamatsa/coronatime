@@ -13,6 +13,7 @@ const StatisticSwitch = () => {
         <NavLink
           to='/'
           className={({ isActive }) => (isActive ? activeClass : undefined)}
+          id='dashboardWorldwideNavLink'
         >
           {t('dashboard.worldwide')}
         </NavLink>
@@ -21,6 +22,7 @@ const StatisticSwitch = () => {
         <NavLink
           to='/by-country'
           className={({ isActive }) => (isActive ? activeClass : undefined)}
+          id='dashboardCountriesNavLink'
         >
           {t('dashboard.by_country')}
         </NavLink>

@@ -33,6 +33,7 @@ const Confirmation: React.FC<{ text: string }> = (props) => {
   }, [location.pathname, location.search]);
   let displayText: string = '';
 
+  /* istanbul ignore else */
   if (location.pathname === '/register/confirm/success') {
     displayText = 'pending.account_confirmed';
   } else if (location.pathname === '/password/pending/success') {

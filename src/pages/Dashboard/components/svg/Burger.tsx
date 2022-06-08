@@ -4,6 +4,7 @@ const Burger: React.FC<{ className: string; onOpen: () => void }> = (props) => {
   return (
     <svg
       className={props.className}
+      id='mobileNavBurger'
       width='18'
       height='16'
       viewBox='0 0 18 16'

@@ -35,6 +35,7 @@ const ResetPassword = () => {
   const recoverPassword = (password: string, repeatPassword: string) => {
     const queryParams = new URLSearchParams(location.search);
     const hash = queryParams.get('hash');
+    /* istanbul ignore else */
     if (!hash) {
       navigate('/login');
     }
@@ -88,7 +89,10 @@ const ResetPassword = () => {
               message: t('passwords_should_match'),
             }}
           />
-          <Button text={t('reset_password.button_text')} />
+          <Button
+            text={t('reset_password.button_text')}
+            id='resetPasswordButton'
+          />
         </form>
       </div>
     </div>

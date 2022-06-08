@@ -81,7 +81,10 @@ function App() {
               path='/register/confirm/*'
               element={<Confirmation text='pending.email_sent' />}
             >
-              <Route path='success' element={<Button text={t('sign_in')} />} />
+              <Route
+                path='success'
+                element={<Button text={t('sign_in')} id='confirmButton' />}
+              />
             </Route>
 
             <Route path='/password' element={<RequestResetPassword />} />
@@ -90,7 +93,10 @@ function App() {
               path='/password/pending/*'
               element={<Confirmation text='pending.email_sent' />}
             >
-              <Route path='success' element={<Button text={t('sign_in')} />} />
+              <Route
+                path='success'
+                element={<Button text={t('sign_in')} id='confirmButton' />}
+              />
             </Route>
             <Route path='*' element={<Login onLogin={loginHandler} />} />
           </>

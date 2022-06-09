@@ -39,7 +39,7 @@ Coronatime is a website where you can register/login and then view covid statist
 1\. First of all you need to clone repository from github:
 
 ```sh
-git clone https://github.com/RedberryInternship/covid19-otomamatsashvili.git
+git clone https://github.com/RedberryInternship/coronatime-otomamatsashvili.git
 ```
 
 2\. Next step requires installing all the dependencies:

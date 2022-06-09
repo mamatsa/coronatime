@@ -11,7 +11,6 @@ let prevSortOrder: string = 'desc';
 const CountryStatistics: React.FC<{
   countries: any;
 }> = (props) => {
-  console.log(1);
   const { i18n } = useTranslation();
   const language = i18n.language === 'geo' ? 'ka' : 'en';
 

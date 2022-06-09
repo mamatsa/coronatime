@@ -4,9 +4,7 @@ import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Input, AuthNavbar } from 'components';
-
-const baseURL: string =
-  'https://coronatime-api.devtest.ge/api/password/recover';
+import { baseURL } from 'services';
 
 const ResetPassword = () => {
   const { t } = useTranslation();
@@ -40,7 +38,7 @@ const ResetPassword = () => {
       navigate('/login');
     }
     axios
-      .post(baseURL, {
+      .post(baseURL + '/password/recover', {
         password,
         repeatPassword,
         hash,

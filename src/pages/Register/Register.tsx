@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input, Button, AuthNavbar } from 'components';
 import { Vaccine } from 'assets/images';
+import { baseURL } from 'services';
 
 type FormInputs = {
   username: string;
@@ -12,8 +13,6 @@ type FormInputs = {
   password: string;
   password2: string;
 };
-
-const baseURL: string = 'https://coronatime-api.devtest.ge/api/register';
 
 const Register = () => {
   const { t } = useTranslation();
@@ -45,7 +44,7 @@ const Register = () => {
     repeatPassword: string
   ) => {
     axios
-      .post(baseURL, {
+      .post(baseURL + '/register', {
         username,
         email,
         password,

@@ -4,8 +4,7 @@ import axios from 'axios';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { AuthNavbar } from 'components';
 import { CheckCircle } from 'assets/images';
-
-const baseURL: string = 'https://coronatime-api.devtest.ge/api/confirm-account';
+import { baseURL } from 'services';
 
 const Confirmation: React.FC<{ text: string }> = (props) => {
   const { t } = useTranslation();
@@ -16,7 +15,7 @@ const Confirmation: React.FC<{ text: string }> = (props) => {
     const hash = queryParams.get('hash');
     const confirmEmail = (hash: string | null) => {
       axios
-        .post(baseURL, {
+        .post(baseURL + '/confirm-account', {
           hash,
         })
         .then((response) => {

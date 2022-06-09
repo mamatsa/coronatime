@@ -5,8 +5,7 @@ import { Navbar, StatisticSwitch } from 'pages/Dashboard/components';
 import { WorldwideStatistics } from 'pages/Dashboard/components';
 import { useLocation } from 'react-router-dom';
 import { CountryStatistics } from 'pages/Dashboard/components';
-
-const baseURL: string = 'https://coronatime-api.devtest.ge/api/countries';
+import { baseURL } from 'services';
 
 type Statistics = {
   confirmed: number;
@@ -45,7 +44,7 @@ const Dashboard: React.FC<{
   // fetch countries list
   useEffect(() => {
     axios
-      .get(baseURL, {
+      .get(baseURL + '/countries', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Basic ${props.token}`,

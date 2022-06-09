@@ -4,9 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Input, AuthNavbar } from 'components';
-
-const baseURL: string =
-  'https://coronatime-api.devtest.ge/api/password/send-recovery-link';
+import { baseURL } from 'services';
 
 const RequestResetPassword = () => {
   const { t } = useTranslation();
@@ -28,7 +26,7 @@ const RequestResetPassword = () => {
 
   const requestPasswordRecovery = (email: string) => {
     axios
-      .post(baseURL, {
+      .post(baseURL + '/password/send-recovery-link', {
         email,
         backlink: `${window.location.host}/password/reset`,
       })

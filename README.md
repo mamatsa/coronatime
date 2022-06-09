@@ -157,7 +157,7 @@ npx cypress open
 
 ### Deployment
 
-Application is deployed on digitalocean server with `ngnix`. You can view it [here](coronatime.otar.redberryinternship.ge).
+Application is deployed on digitalocean server with `ngnix`. You can view it [here](https://coronatime.otar.redberryinternship.ge/).
 
 #
 

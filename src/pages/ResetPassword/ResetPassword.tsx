@@ -33,7 +33,6 @@ const ResetPassword = () => {
   const recoverPassword = (password: string, repeatPassword: string) => {
     const queryParams = new URLSearchParams(location.search);
     const hash = queryParams.get('hash');
-    /* istanbul ignore else */
     if (!hash) {
       navigate('/login');
     }

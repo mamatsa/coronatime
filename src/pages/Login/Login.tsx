@@ -44,7 +44,6 @@ const Login: React.FC<{
       })
       .catch((error) => {
         const response = error.response;
-        /* istanbul ignore else */
         if (response.status === 422) {
           setError('username', {
             type: 'custom',

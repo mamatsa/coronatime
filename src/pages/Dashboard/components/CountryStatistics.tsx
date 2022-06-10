@@ -75,10 +75,8 @@ const CountryStatistics: React.FC<{
       case 'location':
         setFilteredCountries((prevState: any) => {
           return prevState.sort((a: any, b: any) => {
-            /* istanbul ignore else */
             if (sortOrder === 'asc')
               return a.name[language] > b.name[language] ? 1 : -1;
-            /* istanbul ignore next */
             return a.name[language] < b.name[language] ? 1 : -1;
           });
         });

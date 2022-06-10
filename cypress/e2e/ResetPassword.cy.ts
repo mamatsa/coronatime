@@ -16,16 +16,6 @@ describe('Reset Password', () => {
     cy.url().should('include', '/password/pending');
   });
 
-  it('Handles error', () => {
-    cy.visit('/password/reset');
-    cy.get('#password').type('password');
-    cy.get('#password2').type('password');
-    cy.get('#resetPasswordButton').click();
-    cy.intercept('POST', Cypress.env('apiRecovery'), {
-      statusCode: 401,
-    });
-  });
-
   it('User can reset password', () => {
     cy.visit('/password/reset');
     cy.get('#password').type('password');

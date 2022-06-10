@@ -43,11 +43,8 @@ const ResetPassword = () => {
         repeatPassword,
         hash,
       })
-      .then((response) => {
+      .then(() => {
         navigate('/password/pending/success');
-      })
-      .catch((error) => {
-        console.log(error);
       });
   };
 

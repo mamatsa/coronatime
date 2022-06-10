@@ -14,16 +14,9 @@ const Confirmation: React.FC<{ text: string }> = (props) => {
     const queryParams = new URLSearchParams(location.search);
     const hash = queryParams.get('hash');
     const confirmEmail = (hash: string | null) => {
-      axios
-        .post(baseURL + '/confirm-account', {
-          hash,
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      axios.post(baseURL + '/confirm-account', {
+        hash,
+      });
     };
 
     if (location.pathname === '/register/confirm/success' && hash) {

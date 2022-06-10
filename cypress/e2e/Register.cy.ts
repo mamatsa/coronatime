@@ -80,11 +80,6 @@ describe('Sign up page', () => {
     cy.visit('/register/confirm/success?hash=1322323');
     cy.get('#confirmButton').click();
     cy.intercept('POST', Cypress.env('baseApiUrl'), {
-      statusCode: 401,
-    });
-    cy.visit('/register/confirm/success?hash=1322323');
-    cy.get('#confirmButton').click();
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
       statusCode: 201,
     });
   });

@@ -4,11 +4,10 @@ describe('Dashboard', () => {
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');
     cy.get('#loginSubmit').click();
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/*', {
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
       statusCode: 201,
       body: {
-        token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im90byIsImVtYWlsIjoib3Rhci5tYW1hdHNhc2h2aWxpQGdtYWlsLmNvbSIsImlhdCI6MTY1NDY5MTY0N30.wfFNp_nKWrutnhzg5AZPSxKAygZN5y7C3L8-PEPIlkQ',
+        token: Cypress.env('apiToken'),
       },
     }).as('req');
     cy.wait('@req');

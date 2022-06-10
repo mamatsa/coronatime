@@ -9,13 +9,9 @@ describe('Reset Password', () => {
   it('Can continue if email is valid', () => {
     cy.visit('/password');
     cy.get('#email').type('cypress@gmail.com');
-    cy.intercept(
-      'POST',
-      'https://coronatime-api.devtest.ge/api/password/send-recovery-link',
-      {
-        statusCode: 201,
-      }
-    );
+    cy.intercept('POST', Cypress.env('apiRecoveryLink'), {
+      statusCode: 201,
+    });
     cy.get('#requestResetPasswordButton').click();
     cy.url().should('include', '/password/pending');
   });
@@ -25,26 +21,18 @@ describe('Reset Password', () => {
     cy.get('#password').type('password');
     cy.get('#password2').type('password');
     cy.get('#resetPasswordButton').click();
-    cy.intercept(
-      'POST',
-      'https://coronatime-api.devtest.ge/api/password/recover',
-      {
-        statusCode: 401,
-      }
-    );
+    cy.intercept('POST', Cypress.env('apiRecovery'), {
+      statusCode: 401,
+    });
   });
 
   it('User can reset password', () => {
     cy.visit('/password/reset');
     cy.get('#password').type('password');
     cy.get('#password2').type('password');
-    cy.intercept(
-      'POST',
-      'https://coronatime-api.devtest.ge/api/password/recover',
-      {
-        statusCode: 201,
-      }
-    );
+    cy.intercept('POST', Cypress.env('apiRecovery'), {
+      statusCode: 201,
+    });
     cy.get('#resetPasswordButton').click();
   });
 });

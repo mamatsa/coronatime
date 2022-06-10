@@ -1,4 +1,4 @@
-describe('Login page', () => {
+describe('Sign up page', () => {
   beforeEach(() => {
     cy.visit('/register');
   });
@@ -72,28 +72,20 @@ describe('Login page', () => {
     cy.get('#email').type('cypress@gmail.com');
     cy.get('#password').type('cypress123');
     cy.get('#password2').type('cypress123');
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/*', {
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
       statusCode: 201,
     }).as('req');
     cy.get('#registerSubmit').click();
     cy.url().should('include', '/register/confirm');
     cy.visit('/register/confirm/success?hash=1322323');
     cy.get('#confirmButton').click();
-    cy.intercept(
-      'POST',
-      'https://coronatime-api.devtest.ge/api/confirm-account',
-      {
-        statusCode: 401,
-      }
-    );
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+      statusCode: 401,
+    });
     cy.visit('/register/confirm/success?hash=1322323');
     cy.get('#confirmButton').click();
-    cy.intercept(
-      'POST',
-      'https://coronatime-api.devtest.ge/api/confirm-account',
-      {
-        statusCode: 201,
-      }
-    );
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+      statusCode: 201,
+    });
   });
 });

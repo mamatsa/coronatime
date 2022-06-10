@@ -25,7 +25,7 @@ describe('Login page', () => {
   it('User can not log in if username is wrong', () => {
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/*', {
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
       statusCode: 422,
     }).as('req');
     cy.get('#loginSubmit').click();
@@ -35,7 +35,7 @@ describe('Login page', () => {
   it('User can not log in if password is wrong', () => {
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/*', {
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
       statusCode: 401,
     }).as('req');
     cy.get('#loginSubmit').click();

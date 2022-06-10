@@ -36,6 +36,8 @@ Coronatime is a website where you can register/login and then view covid statist
 
 ### Getting Started
 
+**To run this application locally you need to follow the steps below:**
+
 1\. First of all you need to clone repository from github:
 
 ```sh
@@ -51,7 +53,7 @@ npm install
 or
 
 ```sh
-yarn
+yarn install
 ```
 
 3\. After that you can run Coronatime e from terminal:
@@ -66,11 +68,17 @@ or
 yarn run start
 ```
 
+4\. You can also build project for production if you need to:
+
+```sh
+npm run build
+```
+
 #
 
 ### Testing
 
-This application is test driven. To write e2e and integration tests `@cypress` is used. You can find all of the tests into following path: `/cypress/integration/*.spec.js`
+This application is test driven. To write e2e and integration tests `@cypress` is used. You can find all of the tests into following path: `/cypress/e2e/*.cy.ts`
 
 You can run cypress tests using following commands:
 
@@ -96,24 +104,11 @@ npx cypress open
 │   ├─── support  # library configuration files
 ├─── public  # entry folder
 ├───├─── locales # translation files
-|   ├───├─── en
-|   ├───├───├─── translation.json # english translation
-|   ├───├─── geo
-|   ├───├───├─── translation.json # georgian translation
-│   ├─── favicon.png    # tab icon
 │   ├─── index.html     # main html file
-│   ├─── manifest.json  # index.html configurations
-│   ├─── robots.txt     # search optimization
 ├─── readme  # readme assets
 ├─── src  # project source codes
 │   ├─── assets      # project images
-│   ├─── components  # reusable components
-│   ├───├─── svg                  # svg files as react components
-│   ├───├─── AuthNavbar.tsx       # navbar for login/register and related pages
-│   ├───├─── Button.tsx           # main button
-│   ├───├─── Input.tsx            # input with its error handling
-│   ├───├─── LanguageChanger.tsx  # language select
-│   ├───├─── index.ts  # exports components
+│   ├─── components  # reusable components for whole app
 │   ├─── pages  # application pages
 │   ├───├─── Login
 │   ├───├───├─── Login.tsx  # login page
@@ -132,16 +127,9 @@ npx cypress open
 │   ├───├───├─── index.ts          # exports page
 │   ├───├─── Dashboard
 │   ├───├───├─── components  # components for dashboard
-│   ├───├───├───├─── svg  # dashboard svgs
-│   ├───├───├───├─── WorldwideStatistics.tsx  #  dashboard part of worldwide statistics
-│   ├───├───├───├─── CountryStatistics.tsx    #  statistics by country
-│   ├───├───├───├─── StatisticSwitch.tsx      #  navbar for statistics
-│   ├───├───├───├─── Navbar.tsx               #  main dashboard navbar
-│   ├───├───├───├─── MobileSlidebar.tsx       #  navbar for mobile
-│   ├───├───├───├─── index.ts                 #  exports dashboard components
 │   ├───├───├─── Dashboard.jsx  # covid statistics
 │   ├───├───├─── index.ts       # exports dashboard
-│   ├───├─── index.ts  # export all pages
+│   ├───├─── index.ts  # exports all pages
 │   ├─── App.tsx  # main component with routing
 │   ├─── app.css  # main css file
 │   ├─── index.ts # root TS file
@@ -150,7 +138,6 @@ npx cypress open
 ├─── package.json        # dependency manager configurations
 ├─── cypress.config.ts        # cypress config file
 ├─── tailwind.config.js  # tailwind config file
-|
 ```
 
 #

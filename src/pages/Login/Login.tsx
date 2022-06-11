@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { AxiosError } from 'axios';
+import { loginRequest } from 'services/backendRequestsService';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input, Button, AuthNavbar } from 'components';
 import { Vaccine } from 'assets/images';
-import { baseURL } from 'services';
 
 type FormInputs = {
   username: string;
@@ -31,35 +31,30 @@ const Login: React.FC<{
 
   const navigate = useNavigate();
 
-  const loginUser = (username: string, password: string) => {
-    axios
-      .post(baseURL + '/login', {
-        username,
-        password,
-      })
-      .then((response) => {
-        const token: string = response.data.token;
-        props.onLogin(token, watch('username'));
-        navigate('/');
-      })
-      .catch((error) => {
-        const response = error.response;
-        if (response.status === 422) {
-          setError('username', {
-            type: 'custom',
-            message: 'errors.wrong_user',
-          });
-        } else if (response.status === 401) {
-          setError('password', {
-            type: 'custom',
-            message: 'errors.wrong_password',
-          });
-        }
-      });
+  const loginHandler = async (username: string, password: string) => {
+    try {
+      const token = await loginRequest(username, password);
+      props.onLogin(token, watch('username'));
+      navigate('/');
+    } catch (error) {
+      const err = error as AxiosError;
+      const status = err.response?.status;
+      if (status === 422) {
+        setError('username', {
+          type: 'custom',
+          message: 'errors.wrong_user',
+        });
+      } else if (status === 401) {
+        setError('password', {
+          type: 'custom',
+          message: 'errors.wrong_password',
+        });
+      }
+    }
   };
 
   const onSubmit: SubmitHandler<FormInputs> = (data) =>
-    loginUser(data.username, data.password);
+    loginHandler(data.username, data.password);
 
   return (
     <div className=' flex flex-row justify-between'>

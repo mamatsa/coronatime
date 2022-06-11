@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { emailConfirmRequest } from 'services/backendRequestsService';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { AuthNavbar } from 'components';
 import { CheckCircle } from 'assets/images';
-import { baseURL } from 'services';
 
 const Confirmation: React.FC<{ text: string }> = (props) => {
   const { t } = useTranslation();
@@ -13,14 +12,9 @@ const Confirmation: React.FC<{ text: string }> = (props) => {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const hash = queryParams.get('hash');
-    const confirmEmail = (hash: string | null) => {
-      axios.post(baseURL + '/confirm-account', {
-        hash,
-      });
-    };
 
     if (location.pathname === '/register/confirm/success' && hash) {
-      confirmEmail(hash);
+      emailConfirmRequest(hash);
     }
   }, [location.pathname, location.search]);
   let displayText: string = '';

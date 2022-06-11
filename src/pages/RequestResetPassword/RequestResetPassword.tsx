@@ -1,10 +1,8 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { passwordRecoveryLinkRequest } from 'services/backendRequestsService';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Input, AuthNavbar } from 'components';
-import { baseURL } from 'services';
 
 const RequestResetPassword = () => {
   const { t } = useTranslation();
@@ -24,21 +22,16 @@ const RequestResetPassword = () => {
 
   const navigate = useNavigate();
 
-  const requestPasswordRecovery = (email: string) => {
-    axios
-      .post(baseURL + '/password/send-recovery-link', {
-        email,
-        backlink: `${window.location.host}/password/reset`,
-      })
-      .then((response) => {
-        navigate('/password/pending');
-      })
-      .catch((error) => {
-        setError('email', {
-          type: 'custom',
-          message: 'errors.unknown_email',
-        });
+  const requestPasswordRecovery = async (email: string) => {
+    try {
+      await passwordRecoveryLinkRequest(email);
+      navigate('/password/pending');
+    } catch (error) {
+      setError('email', {
+        type: 'custom',
+        message: 'errors.unknown_email',
       });
+    }
   };
 
   return (

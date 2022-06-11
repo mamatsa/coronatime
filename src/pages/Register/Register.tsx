@@ -1,11 +1,9 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { registerRequest } from 'services/backendRequestsService';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input, Button, AuthNavbar } from 'components';
 import { Vaccine } from 'assets/images';
-import { baseURL } from 'services';
 
 type FormInputs = {
   username: string;
@@ -37,33 +35,25 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const registerUser = (
+  const registerUser = async (
     username: string,
     email: string,
     password: string,
     repeatPassword: string
   ) => {
-    axios
-      .post(baseURL + '/register', {
-        username,
-        email,
-        password,
-        repeatPassword,
-        redirectOnConfirm: `${window.location.host}/register/confirm/success`,
-      })
-      .then((response) => {
-        navigate('/register/confirm');
-      })
-      .catch((error) => {
-        const errorTarget = error.response.data[0].context.label;
-        setError(errorTarget, {
-          type: 'custom',
-          message:
-            errorTarget === 'email'
-              ? 'errors.email_taken'
-              : 'errors.username_taken',
-        });
+    try {
+      await registerRequest(username, email, password, repeatPassword);
+      navigate('/register/confirm');
+    } catch (error) {
+      const errorTarget = error.response?.data[0].context.label;
+      setError(errorTarget, {
+        type: 'custom',
+        message:
+          errorTarget === 'email'
+            ? 'errors.email_taken'
+            : 'errors.username_taken',
       });
+    }
   };
 
   return (

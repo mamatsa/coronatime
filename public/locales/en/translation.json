@@ -23,7 +23,8 @@
     "wrong_password": "Password is incorrect",
     "email_taken": "This email is already taken",
     "username_taken": "This username is already taken",
-    "unknown_email": "There is no user with such email"
+    "unknown_email": "There is no user with such email",
+    "password_recovery_problem": "Password change failed"
   },
   "reset_password": {
     "title": "Reset Password",

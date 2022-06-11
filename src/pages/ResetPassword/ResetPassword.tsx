@@ -1,10 +1,8 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { passwordRecoveryRequest } from 'services/backendRequestsService';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Input, AuthNavbar } from 'components';
-import { baseURL } from 'services';
 
 const ResetPassword = () => {
   const { t } = useTranslation();
@@ -13,6 +11,7 @@ const ResetPassword = () => {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors, dirtyFields },
   } = useForm<{ password: string; password2: string }>({
     mode: 'onChange',
@@ -30,21 +29,20 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const recoverPassword = (password: string, repeatPassword: string) => {
+  const recoverPassword = async (password: string, repeatPassword: string) => {
     const queryParams = new URLSearchParams(location.search);
     const hash = queryParams.get('hash');
     if (!hash) {
       navigate('/login');
     }
-    axios
-      .post(baseURL + '/password/recover', {
-        password,
-        repeatPassword,
-        hash,
-      })
-      .then(() => {
-        navigate('/password/pending/success');
+    try {
+      await passwordRecoveryRequest(password, repeatPassword, hash);
+    } catch (error) {
+      setError('password', {
+        type: 'custom',
+        message: 'errors.password_recovery_problem',
       });
+    }
   };
 
   return (

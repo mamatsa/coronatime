@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
-import { Navbar, StatisticSwitch } from 'pages/Dashboard/components';
-import { WorldwideStatistics } from 'pages/Dashboard/components';
+import { countryRequest } from 'services/backendRequestsService';
 import { useLocation } from 'react-router-dom';
-import { CountryStatistics } from 'pages/Dashboard/components';
-import { baseURL } from 'services';
+import {
+  Navbar,
+  StatisticSwitch,
+  WorldwideStatistics,
+  CountryStatistics,
+} from 'pages/Dashboard/components';
 
 type Statistics = {
   confirmed: number;
@@ -43,17 +45,14 @@ const Dashboard: React.FC<{
 
   // fetch countries list
   useEffect(() => {
-    axios
-      .get(baseURL + '/countries', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${props.token}`,
-        },
-      })
-      .then((response) => {
-        countStatistics(response.data);
-        setCountries(response.data);
-      });
+    const getCountries = async (token: string) => {
+      try {
+        const data = await countryRequest(props.token);
+        countStatistics(data);
+        setCountries(data);
+      } catch (error) {}
+    };
+    getCountries(props.token);
   }, [props.token]);
 
   const location = useLocation();

@@ -3,7 +3,8 @@
     "react-app",
     "react-app/jest",
     "prettier",
-    "plugin:cypress/recommended"
+    "plugin:cypress/recommended",
+    "eslint:recommended"
   ],
   "plugins": ["prettier"],
   "rules": {

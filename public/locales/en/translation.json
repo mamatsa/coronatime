@@ -43,7 +43,8 @@
     "new_cases": "New cases",
     "recovered": "Recovered",
     "deaths": "Deaths",
-    "location": "Location"
+    "location": "Location",
+    "not_found": "Statistics not found"
   },
   "username": "Username",
   "email": "Email",

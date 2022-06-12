@@ -24,6 +24,7 @@ const Dashboard: React.FC<{
 
   const [statistics, setStatistics] = useState<Statistics>();
   const [countries, setCountries] = useState<any>();
+  const [requestFailed, setRequestFailed] = useState<boolean>(false);
 
   // calculate worldwide statistics
   const countStatistics = (data: any) => {
@@ -50,7 +51,9 @@ const Dashboard: React.FC<{
         const data = await countryRequest(props.token);
         countStatistics(data);
         setCountries(data);
-      } catch (error) {}
+      } catch (error) {
+        setRequestFailed(true);
+      }
     };
     getCountries(props.token);
   }, [props.token]);
@@ -63,20 +66,32 @@ const Dashboard: React.FC<{
   return (
     <div className=' py-4 px-2 md:py-10 sm:px-6 lg:px-20 xl:px-28'>
       <Navbar username={props.username} onLogout={props.onLogout} />
-      <h1 className=' font-bold text-[25px]'>
-        {isWorldwide
-          ? t('dashboard.worldwide_title')
-          : t('dashboard.country_title')}
-      </h1>
-      <StatisticSwitch />
-
-      <div className='80vw h-px mt-4 bg-border-gray'></div>
-
-      {statistics && isWorldwide && (
-        <WorldwideStatistics statistics={statistics} />
+      {requestFailed && (
+        <h2 id='dashboardError' className=' text-2xl font-bold'>
+          {t('dashboard.not_found')}
+        </h2>
       )}
+      {!requestFailed && (
+        <>
+          <h1 className=' font-bold text-[25px]'>
+            {isWorldwide
+              ? t('dashboard.worldwide_title')
+              : t('dashboard.country_title')}
+          </h1>
 
-      {!isWorldwide && countries && <CountryStatistics countries={countries} />}
+          <StatisticSwitch />
+
+          <div className='80vw h-px mt-4 bg-border-gray'></div>
+
+          {statistics && isWorldwide && (
+            <WorldwideStatistics statistics={statistics} />
+          )}
+
+          {!isWorldwide && countries && (
+            <CountryStatistics countries={countries} />
+          )}
+        </>
+      )}
     </div>
   );
 };

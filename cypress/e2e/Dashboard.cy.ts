@@ -30,4 +30,22 @@ describe('Dashboard', () => {
     cy.get('#mobileNavBurger').click();
     cy.get('#mobileNavLogout').click();
   });
+
+  it('User can see error message if countries request failed', () => {
+    cy.visit('/');
+    cy.get('#username').type('cypress');
+    cy.get('#password').type('password');
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+      statusCode: 201,
+      body: {
+        token: Cypress.env('apiToken'),
+      },
+    });
+    cy.intercept('GET', Cypress.env('baseApiUrl'), {
+      statusCode: 401,
+    });
+    cy.get('#loginSubmit').click();
+    cy.get('#dashboardError').should('be.visible');
+    cy.get('#dashboardLogout').click();
+  });
 });

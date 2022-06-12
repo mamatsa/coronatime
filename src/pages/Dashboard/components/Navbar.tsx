@@ -31,7 +31,7 @@ const Navbar: React.FC<{ username: string | null; onLogout: () => void }> = (
         <li className='gap-8 hidden md:flex'>
           <p className=' font-bold'>{props.username}</p>
           <div className=' w-px h-8 bg-light-gray'></div>
-          <Link to='/login' onClick={props.onLogout}>
+          <Link to='/login' onClick={props.onLogout} id='dashboardLogout'>
             {t('log_out')}
           </Link>
         </li>

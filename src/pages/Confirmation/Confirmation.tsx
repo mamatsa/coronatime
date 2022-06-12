@@ -32,7 +32,9 @@ const Confirmation: React.FC<{ text: string }> = (props) => {
       <AuthNavbar />
       <div className='flex flex-col justify-center items-center h-3/4 gap-4'>
         <img src={CheckCircle} alt='circle' width={56} />
-        <p className=' text-text-dark text-[18px]'>{t(displayText)}</p>
+        <p className=' text-text-dark text-[18px]' id='confirmationMessage'>
+          {t(displayText)}
+        </p>
         <Link to='/login' className=' w-96 my-16'>
           <Outlet />
         </Link>

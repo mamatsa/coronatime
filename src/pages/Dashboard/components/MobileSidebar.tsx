@@ -2,12 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from 'assets/images';
 import { useTranslation } from 'react-i18next';
-
-type Sidebar = {
-  username: string | null;
-  onLogout: () => void;
-  onSidebarClose: () => void;
-};
+import { Sidebar } from 'types';
 
 const MobileSidebar: React.FC<Sidebar> = (props) => {
   const { t } = useTranslation();

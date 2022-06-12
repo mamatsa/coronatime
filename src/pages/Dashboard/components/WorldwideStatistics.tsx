@@ -5,9 +5,10 @@ import {
   RecoveredLine,
   DeathLine,
 } from 'pages/Dashboard/components/svg';
+import { Statistics } from 'types';
 
 const WorldwideStatistics: React.FC<{
-  statistics: { confirmed: number; recovered: number; deaths: number };
+  statistics: Statistics;
 }> = (props) => {
   const { t } = useTranslation();
   return (

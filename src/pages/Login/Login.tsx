@@ -6,16 +6,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input, Button, AuthNavbar } from 'components';
 import { Vaccine } from 'assets/images';
+import { LoginForm, LoginComponent } from 'types';
 
-type FormInputs = {
-  username: string;
-  password: string;
-  remember: string;
-};
-
-const Login: React.FC<{
-  onLogin: (userToken: string, userName: string) => void;
-}> = (props) => {
+const Login: React.FC<LoginComponent> = (props) => {
   const { t } = useTranslation();
 
   const {
@@ -24,7 +17,7 @@ const Login: React.FC<{
     setError,
     watch,
     formState: { errors, dirtyFields },
-  } = useForm<FormInputs>({
+  } = useForm<LoginForm>({
     mode: 'onChange',
     shouldUnregister: true,
   });
@@ -53,7 +46,7 @@ const Login: React.FC<{
     }
   };
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) =>
+  const onSubmit: SubmitHandler<LoginForm> = (data) =>
     loginHandler(data.username, data.password);
 
   return (

@@ -3,6 +3,7 @@ import { passwordRecoveryRequest } from 'services/backendRequestsService';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Input, AuthNavbar } from 'components';
+import { RecoverPasswordForm } from 'types';
 
 const ResetPassword = () => {
   const { t } = useTranslation();
@@ -13,14 +14,13 @@ const ResetPassword = () => {
     watch,
     setError,
     formState: { errors, dirtyFields },
-  } = useForm<{ password: string; password2: string }>({
+  } = useForm<RecoverPasswordForm>({
     mode: 'onChange',
     shouldUnregister: true,
   });
 
-  const onSubmit: SubmitHandler<{ password: string; password2: string }> = (
-    data
-  ) => recoverPassword(data.password, data.password2);
+  const onSubmit: SubmitHandler<RecoverPasswordForm> = (data) =>
+    recoverPassword(data.password, data.password2);
 
   const passwordsMatch = () => {
     return watch('password') === watch('password2');

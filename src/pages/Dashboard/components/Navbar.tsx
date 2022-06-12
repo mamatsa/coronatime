@@ -5,10 +5,9 @@ import { LanguageChanger } from 'components';
 import { Link } from 'react-router-dom';
 import { Burger } from 'pages/Dashboard/components/svg';
 import { MobileSidebar } from 'pages/Dashboard/components/';
+import { NavbarComponent } from 'types';
 
-const Navbar: React.FC<{ username: string | null; onLogout: () => void }> = (
-  props
-) => {
+const Navbar: React.FC<NavbarComponent> = (props) => {
   const { t } = useTranslation();
 
   const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(false);

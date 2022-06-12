@@ -8,18 +8,9 @@ import {
   WorldwideStatistics,
   CountryStatistics,
 } from 'pages/Dashboard/components';
+import { Statistics, DashboardProps } from 'types';
 
-type Statistics = {
-  confirmed: number;
-  recovered: number;
-  deaths: number;
-};
-
-const Dashboard: React.FC<{
-  username: string | null;
-  token: string;
-  onLogout: () => void;
-}> = (props) => {
+const Dashboard: React.FC<DashboardProps> = (props) => {
   const { t } = useTranslation();
 
   const [statistics, setStatistics] = useState<Statistics>();
@@ -46,7 +37,7 @@ const Dashboard: React.FC<{
 
   // fetch countries list
   useEffect(() => {
-    const getCountries = async (token: string) => {
+    const getCountries = async () => {
       try {
         const data = await countryRequest(props.token);
         countStatistics(data);
@@ -55,7 +46,7 @@ const Dashboard: React.FC<{
         setRequestFailed(true);
       }
     };
-    getCountries(props.token);
+    getCountries();
   }, [props.token]);
 
   const location = useLocation();

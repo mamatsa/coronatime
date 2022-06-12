@@ -3,6 +3,7 @@ import { passwordRecoveryLinkRequest } from 'services/backendRequestsService';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Input, AuthNavbar } from 'components';
+import { EmailForm } from 'types';
 
 const RequestResetPassword = () => {
   const { t } = useTranslation();
@@ -12,12 +13,12 @@ const RequestResetPassword = () => {
     handleSubmit,
     setError,
     formState: { errors, dirtyFields },
-  } = useForm<{ email: string }>({
+  } = useForm<EmailForm>({
     mode: 'onChange',
     shouldUnregister: true,
   });
 
-  const onSubmit: SubmitHandler<{ email: string }> = (data) =>
+  const onSubmit: SubmitHandler<EmailForm> = (data) =>
     requestPasswordRecovery(data.email);
 
   const navigate = useNavigate();

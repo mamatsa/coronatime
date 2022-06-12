@@ -4,13 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input, Button, AuthNavbar } from 'components';
 import { Vaccine } from 'assets/images';
-
-type FormInputs = {
-  username: string;
-  email: string;
-  password: string;
-  password2: string;
-};
+import { RegisterForm } from 'types';
 
 const Register = () => {
   const { t } = useTranslation();
@@ -21,12 +15,12 @@ const Register = () => {
     watch,
     setError,
     formState: { errors, dirtyFields },
-  } = useForm<FormInputs>({
+  } = useForm<RegisterForm>({
     mode: 'onChange',
     shouldUnregister: true,
   });
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) =>
+  const onSubmit: SubmitHandler<RegisterForm> = (data) =>
     registerUser(data.username, data.email, data.password, data.password2);
 
   const passwordsMatch = () => {

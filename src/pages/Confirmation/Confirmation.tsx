@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { emailConfirmRequest } from 'services/backendRequestsService';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { AuthNavbar } from 'components';
-import { CheckCircle } from 'assets/images';
+import { CheckCircle } from 'assets';
 
 const Confirmation: React.FC<{ text: string }> = (props) => {
   const { t } = useTranslation();

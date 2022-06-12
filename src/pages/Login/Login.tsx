@@ -5,7 +5,7 @@ import { loginRequest } from 'services/backendRequestsService';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input, Button, AuthNavbar } from 'components';
-import { Vaccine } from 'assets/images';
+import { Vaccine } from 'assets';
 import { LoginForm, LoginComponent } from 'types';
 
 const Login: React.FC<LoginComponent> = (props) => {

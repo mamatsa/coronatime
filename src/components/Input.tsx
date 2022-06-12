@@ -11,11 +11,10 @@ const Input: React.FC<{
   required: boolean;
   register?: any;
   minLength?: number;
-  customValidation?: any;
+  customValidation?: { func: () => boolean; message: string };
   errors?: any;
   isDirty?: boolean | undefined;
   tip?: string;
-  t?: string;
 }> = (props) => {
   const hasTip: boolean = !props.errors[props.name] && !props.isDirty;
 
@@ -66,6 +65,7 @@ const Input: React.FC<{
           props.errors[props.name]?.type === 'validate') && <ErrorMark />}
         {t(props.errors[props.name]?.message, { symbols: props.minLength })}
         {props.errors[props.name]?.type === 'validate' &&
+          props.customValidation &&
           t(props.customValidation.message)}
       </p>
     </div>

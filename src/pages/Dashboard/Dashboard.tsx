@@ -8,17 +8,17 @@ import {
   WorldwideStatistics,
   CountryStatistics,
 } from 'pages/Dashboard/components';
-import { Statistics, DashboardProps } from 'types';
+import { Statistics, DashboardProps, Country } from 'types';
 
 const Dashboard: React.FC<DashboardProps> = (props) => {
   const { t } = useTranslation();
 
   const [statistics, setStatistics] = useState<Statistics>();
-  const [countries, setCountries] = useState<any>();
+  const [countries, setCountries] = useState<Country[]>();
   const [requestFailed, setRequestFailed] = useState<boolean>(false);
 
   // calculate worldwide statistics
-  const countStatistics = (data: any) => {
+  const countStatistics = (data: Country[]) => {
     let totalConfirmed: number = 0;
     let totalRecovered: number = 0;
     let totalDeaths: number = 0;
@@ -39,7 +39,7 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
   useEffect(() => {
     const getCountries = async () => {
       try {
-        const data = await countryRequest(props.token);
+        const data: Country[] = await countryRequest(props.token);
         countStatistics(data);
         setCountries(data);
       } catch (error) {

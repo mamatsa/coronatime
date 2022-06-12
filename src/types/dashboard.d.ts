@@ -1,3 +1,15 @@
+export type Country = {
+  code: string;
+  name: { en: string; ka: 'string' };
+  statistics: {
+    confirmed: number;
+    recovered: number;
+    critical: number;
+    deaths: number;
+  };
+  _id: 'string';
+};
+
 export type Statistics = {
   confirmed: number;
   recovered: number;

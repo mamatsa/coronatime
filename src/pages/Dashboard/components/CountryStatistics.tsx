@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { SelectOption } from 'pages/Dashboard/components/svg';
+import { Country } from 'types';
 
 // helps to find out if sort option have changed
 let prevSortOption: string = 'location';
 let prevSortOrder: string = 'desc';
 
 const CountryStatistics: React.FC<{
-  countries: any;
+  countries: Country[];
 }> = (props) => {
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'geo' ? 'ka' : 'en';
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [countries] = useState<any>(props.countries);
-  const [filteredCountries, setFilteredCountries] = useState<any>(
+  const [countries] = useState<Country[]>(props.countries);
+  const [filteredCountries, setFilteredCountries] = useState<Country[]>(
     props.countries
   );
   const [searchText, setSearchText] = useState<string>('');
@@ -45,8 +46,8 @@ const CountryStatistics: React.FC<{
     prevSortOrder = sortOrder;
     switch (sortOption) {
       case 'cases':
-        setFilteredCountries((prevState: any) => {
-          return prevState.sort((a: any, b: any) => {
+        setFilteredCountries((prevState) => {
+          return prevState.sort((a, b) => {
             if (sortOrder === 'asc')
               return a.statistics.confirmed - b.statistics.confirmed;
             return b.statistics.confirmed - a.statistics.confirmed;
@@ -54,8 +55,8 @@ const CountryStatistics: React.FC<{
         });
         break;
       case 'deaths':
-        setFilteredCountries((prevState: any) => {
-          return prevState.sort((a: any, b: any) => {
+        setFilteredCountries((prevState) => {
+          return prevState.sort((a, b) => {
             if (sortOrder === 'asc')
               return a.statistics.deaths - b.statistics.deaths;
             return b.statistics.deaths - a.statistics.deaths;
@@ -63,8 +64,8 @@ const CountryStatistics: React.FC<{
         });
         break;
       case 'recovered':
-        setFilteredCountries((prevState: any) => {
-          return prevState.sort((a: any, b: any) => {
+        setFilteredCountries((prevState) => {
+          return prevState.sort((a, b) => {
             if (sortOrder === 'asc')
               return a.statistics.recovered - b.statistics.recovered;
             return b.statistics.recovered - a.statistics.recovered;
@@ -72,8 +73,8 @@ const CountryStatistics: React.FC<{
         });
         break;
       case 'location':
-        setFilteredCountries((prevState: any) => {
-          return prevState.sort((a: any, b: any) => {
+        setFilteredCountries((prevState) => {
+          return prevState.sort((a, b) => {
             if (sortOrder === 'asc')
               return a.name[language] > b.name[language] ? 1 : -1;
             return a.name[language] < b.name[language] ? 1 : -1;
@@ -86,7 +87,7 @@ const CountryStatistics: React.FC<{
   useEffect(() => {
     if (searchText !== '') {
       setFilteredCountries(
-        countries.filter((country: any) => {
+        countries.filter((country) => {
           const countryName =
             language === 'en' ? country.name.en.toLowerCase() : country.name.ka;
           const countryNameTranslated =
@@ -195,7 +196,7 @@ const CountryStatistics: React.FC<{
             </tr>
           </thead>
           <tbody className=' block h-full overflow-y-scroll'>
-            {filteredCountries.map((country: any) => {
+            {filteredCountries.map((country) => {
               return (
                 <tr
                   key={country['_id']}

@@ -56,7 +56,13 @@ or
 yarn install
 ```
 
-3\. After that you can run Coronatime e from terminal:
+3\. Then copy env example file. You can change environment variables inside .env with your preferences:
+
+```sh
+cp .env.example .env
+```
+
+4\. After that you can run Coronatime from terminal:
 
 ```sh
 npm start
@@ -68,7 +74,7 @@ or
 yarn run start
 ```
 
-4\. You can also build project for production if you need to:
+5\. You can also build project for production if you need to:
 
 ```sh
 npm run build

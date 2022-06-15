@@ -103,6 +103,7 @@ npx cypress open
 #
 
 ### Project Structure
+Every file is not included.
 
 ```bash
 ├─── cypress # test files
@@ -117,24 +118,19 @@ npx cypress open
 │   ├─── components  # reusable components for whole app
 │   ├─── pages  # application pages
 │   ├───├─── Login
+│   ├───├───├─── components  # components for login
 │   ├───├───├─── Login.tsx  # login page
-│   ├───├───├─── index.ts   # exports page
 │   ├───├─── Register
 │   ├───├───├─── Register.tsx  # registration page
-│   ├───├───├─── index.ts      # exports page
 │   ├───├─── RequestResetPassword
 │   ├───├───├─── RequestResetPassword.tsx  # request password reset for specific email
-│   ├───├───├─── index.ts                  # exports page
 │   ├───├─── ResetPassword
 │   ├───├───├─── ResetPassword.tsx  # sets new password
-│   ├───├───├─── index.ts           # exports page
 │   ├───├─── Confirmation
 │   ├───├───├─── Confirmation.tsx  # combines auth related pending and confirmation pages
-│   ├───├───├─── index.ts          # exports page
 │   ├───├─── Dashboard
 │   ├───├───├─── components  # components for dashboard
 │   ├───├───├─── Dashboard.jsx  # covid statistics
-│   ├───├───├─── index.ts       # exports dashboard
 │   ├───├─── index.ts  # exports all pages
 │   ├─── App.tsx  # main component with routing
 │   ├─── app.css  # main css file

@@ -38,6 +38,7 @@ describe('Login page', () => {
   it('User can not log in if password is wrong', () => {
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');
+    cy.get('#loginCheckbox').click();
     cy.intercept('POST', Cypress.env('baseApiUrl'), {
       statusCode: 401,
     }).as('req');

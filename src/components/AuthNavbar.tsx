@@ -14,4 +14,4 @@ const AuthNavbar = () => {
   );
 };
 
-export default AuthNavbar;
+export default React.memo(AuthNavbar);

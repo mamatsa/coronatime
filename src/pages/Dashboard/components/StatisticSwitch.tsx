@@ -33,4 +33,4 @@ const StatisticSwitch = () => {
   );
 };
 
-export default StatisticSwitch;
+export default React.memo(StatisticSwitch);

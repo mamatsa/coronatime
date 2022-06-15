@@ -103,7 +103,8 @@ npx cypress open
 #
 
 ### Project Structure
-Every file is not included.
+
+**Every file is not included.**
 
 ```bash
 ├─── cypress # test files
@@ -132,13 +133,17 @@ Every file is not included.
 │   ├───├───├─── components  # components for dashboard
 │   ├───├───├─── Dashboard.jsx  # covid statistics
 │   ├───├─── index.ts  # exports all pages
+│   ├─── services # backend request files
+│   ├─── types    # type files
 │   ├─── App.tsx  # main component with routing
 │   ├─── app.css  # main css file
 │   ├─── index.ts # root TS file
+│   ├─── i18n.ts  # i18n configuration
+├─── .env                # environment variables
 ├─── .eslintrc.json      # eslint config file
 ├─── .prettierrc.js      # prettier config file
 ├─── package.json        # dependency manager configurations
-├─── cypress.config.ts        # cypress config file
+├─── cypress.config.ts   # cypress config file
 ├─── tailwind.config.js  # tailwind config file
 ```
 

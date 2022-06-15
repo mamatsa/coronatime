@@ -49,8 +49,13 @@ const ResetPassword = () => {
     <div className=' w-full h-screen flex flex-col items-center py-10 px-5'>
       <AuthNavbar />
       <div className='flex flex-col justify-center items-center h-3/4 gap-16'>
-        <h2 className=' font-black text-[25px]'>{t('reset_password.title')}</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
+        <h2 className=' font-black text-[25px] md:mx-24'>
+          {t('reset_password.title')}
+        </h2>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='w-full flex flex-col'
+        >
           <Input
             label={t('password')}
             id='password'

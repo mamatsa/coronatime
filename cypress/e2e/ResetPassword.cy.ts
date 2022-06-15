@@ -16,6 +16,16 @@ describe('Reset Password', () => {
     cy.url().should('include', '/password/pending');
   });
 
+  it('Error catch while setting new password', () => {
+    cy.visit('/password/reset');
+    cy.get('#password').type('password');
+    cy.get('#password2').type('password');
+    cy.intercept('POST', Cypress.env('apiRecovery'), {
+      statusCode: 401,
+    });
+    cy.get('#resetPasswordButton').click();
+  });
+
   it('User can reset password', () => {
     cy.visit('/password/reset');
     cy.get('#password').type('password');

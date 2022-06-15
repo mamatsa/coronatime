@@ -8,8 +8,11 @@ describe('Login page', () => {
   });
 
   it('User can change language', () => {
-    cy.get('#languageChanger').select('ქართული');
+    cy.get('#languageChanger').click();
+    cy.contains('ქართული').click();
     cy.get('#loginWelcome').should('have.text', 'კეთილი იყოს თქვენი დაბრუნება');
+    cy.get('#languageChanger').click();
+    cy.contains('English').click();
   });
 
   it('User can go to registration page', () => {

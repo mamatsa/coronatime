@@ -21,7 +21,8 @@ describe('Dashboard', () => {
     cy.get('#sortByRecovered').click();
     cy.get('#sortByRecovered').click();
     cy.get('#dashboardSearch').type('g');
-    cy.get('#languageChanger').select('ქართული');
+    cy.get('#languageChanger').click();
+    cy.contains('ქართული').click();
     cy.get('#dashboardSearch').type('e');
     cy.get('#dashboardWorldwideNavLink').click();
     cy.viewport('iphone-6');

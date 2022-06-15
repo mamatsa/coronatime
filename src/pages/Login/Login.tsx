@@ -52,6 +52,7 @@ const Login: React.FC<LoginComponent> = (props) => {
     <AuthWrapper
       welcomeText={t('login.welcome')}
       pageInfo={t('login.enter_info')}
+      welcomeId='loginWelcome'
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input

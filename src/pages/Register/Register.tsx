@@ -53,6 +53,7 @@ const Register = () => {
     <AuthWrapper
       welcomeText={t('register.welcome')}
       pageInfo={t('register.enter_info')}
+      welcomeId='registerWelcome'
     >
       <form onSubmit={handleSubmit(onSubmit)} className=' space-y-2'>
         <Input

@@ -10,7 +10,11 @@ const LanguageChanger: React.FC<{ dashboard?: boolean }> = (props) => {
   };
 
   return (
-    <Menu as='div' className='relative inline-block text-left'>
+    <Menu
+      as='div'
+      className='relative inline-block text-left'
+      id='languageChanger'
+    >
       <div>
         <Menu.Button
           type='button'

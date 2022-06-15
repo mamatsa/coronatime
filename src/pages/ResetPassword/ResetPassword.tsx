@@ -61,7 +61,7 @@ const ResetPassword = () => {
             id='password'
             name='password'
             minLength={3}
-            placeholder={t('password-placeholder')}
+            placeholder={t('password_placeholder')}
             required={true}
             type='password'
             register={register}

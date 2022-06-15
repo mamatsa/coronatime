@@ -5,9 +5,9 @@ import { Logo } from 'components/svg';
 
 const AuthNavbar = () => {
   return (
-    <div className='flex justify-between gap-5 md:gap-24'>
+    <div className='flex justify-between gap-5 xs:gap-24'>
       <Link to='/login'>
-        <Logo />
+        <Logo className=' w-full xs:w-fit' />
       </Link>
       <LanguageChanger />
     </div>

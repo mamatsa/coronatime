@@ -84,6 +84,7 @@ const ResetPassword = () => {
           <Button
             text={t('reset_password.button_text')}
             id='resetPasswordButton'
+            classes='absolute bottom-10 left-5 right-5 xs:static'
           />
         </form>
       </div>

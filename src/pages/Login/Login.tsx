@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input, Button, AuthWrapper } from 'components';
 import { LoginForm, LoginComponent } from 'types';
+import { Checkbox } from './components';
 
 const Login: React.FC<LoginComponent> = (props) => {
   const { t } = useTranslation();
@@ -82,18 +83,7 @@ const Login: React.FC<LoginComponent> = (props) => {
           isDirty={dirtyFields.password}
         />
         <div className=' flex justify-between mb-6'>
-          <div className=' flex items-center'>
-            <input
-              type='checkbox'
-              id='remember'
-              value={'remembered'}
-              {...register('remember')}
-              className='w-4 h-4 accent-green-600'
-            />
-            <label htmlFor='remember' className=' text-sm font-semibold ml-2'>
-              {t('login.remember_device')}
-            </label>
-          </div>
+          <Checkbox />
           <Link
             to='/password'
             className=' text-sm text-main-blue font-semibold'

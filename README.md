@@ -91,7 +91,7 @@ You can run cypress tests using following commands:
 1\. Copy cypress configuration file and if you need feel free to change it:
 
 ```sh
-cp cypress.config.example.ts cypress.config.ts
+cp cypress.config.ts.example cypress.config.ts
 ```
 
 2\. Open cypress:

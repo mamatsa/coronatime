@@ -109,7 +109,7 @@ const CountryStatistics: React.FC<{
     <div className=' flex flex-col items-center'>
       <input
         type='text'
-        placeholder='Search by country'
+        placeholder={t('dashboard.search_by_country')}
         className=' self-start py-3 pl-14 my-6 border border-light-gray rounded-lg text-xs bg-input-search bg-no-repeat bg-[center_left_1.2rem] md:my-8 md:text-base md:py-4'
         id='dashboardSearch'
         value={searchText}

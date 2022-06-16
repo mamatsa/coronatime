@@ -11,7 +11,7 @@
   "register": {
     "welcome": "Welcome to Coronatime",
     "enter_info": "Please enter required info to sign up",
-    "username_placeholder": "enter unique username",
+    "username_placeholder": "Enter unique username",
     "username_format": "Username should be unique, min 3 symbols",
     "already_have_account": "Already have an account?"
   },
@@ -44,7 +44,8 @@
     "recovered": "Recovered",
     "deaths": "Deaths",
     "location": "Location",
-    "not_found": "Statistics not found"
+    "not_found": "Statistics not found",
+    "search_by_country": "Search by country"
   },
   "username": "Username",
   "email": "Email",

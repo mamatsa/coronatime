@@ -14,7 +14,11 @@ const Confirmation: React.FC<{ text: string }> = (props) => {
     const hash = queryParams.get('hash');
 
     if (location.pathname === '/register/confirm/success' && hash) {
-      emailConfirmRequest(hash);
+      try {
+        emailConfirmRequest(hash);
+      } catch {
+        // pass catch;
+      }
     }
   }, [location.pathname, location.search]);
   let displayText: string = '';

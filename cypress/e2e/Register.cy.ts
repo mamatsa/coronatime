@@ -87,6 +87,13 @@ describe('Sign up page', () => {
     cy.get('#password2').should('have.class', 'border-main-green');
   });
 
+  it('Registration confirmation error is handled', () => {
+    cy.visit('/register/confirm/success');
+    cy.intercept('POST', Cypress.env('resetPasswordApi'), {
+      statusCode: 401,
+    });
+  });
+
   it('User can register', () => {
     cy.get('#username').type('e2e test');
     cy.get('#email').type('cypress@gmail.com');

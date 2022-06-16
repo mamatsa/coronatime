@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   Login,
@@ -60,16 +65,7 @@ function App() {
                 />
               }
             />
-            <Route
-              path='*'
-              element={
-                <Dashboard
-                  token={token}
-                  username={user}
-                  onLogout={logoutHandler}
-                />
-              }
-            />
+            <Route path='*' element={<Navigate to='/' replace />} />
           </>
         )}
         {!token && (
@@ -98,7 +94,7 @@ function App() {
                 element={<Button text={t('sign_in')} id='confirmButton' />}
               />
             </Route>
-            <Route path='*' element={<Login onLogin={loginHandler} />} />
+            <Route path='*' element={<Navigate to='/login' replace />} />
           </>
         )}
       </Routes>

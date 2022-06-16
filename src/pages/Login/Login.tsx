@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AxiosError } from 'axios';
-import { loginRequest } from 'services/backendRequestsService';
+import { loginRequest } from 'services';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Input, Button, AuthWrapper } from 'components';
 import { LoginForm, LoginComponent } from 'types';
-import { Checkbox } from './components';
+import { Input, Button, AuthWrapper } from 'components';
+import { Checkbox } from 'pages/Login/components';
 
 const Login: React.FC<LoginComponent> = (props) => {
   const { t } = useTranslation();

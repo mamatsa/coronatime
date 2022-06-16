@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LanguageChanger } from 'components/';
-import { Logo } from 'components/svg';
+import { LanguageChanger, Logo } from 'components';
 
 const AuthNavbar = () => {
   return (

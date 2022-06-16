@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { passwordRecoveryRequest } from 'services/backendRequestsService';
+import { passwordRecoveryRequest } from 'services';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Button, Input, AuthNavbar } from 'components';
 import { RecoverPasswordForm } from 'types';
+import { Button, Input, AuthNavbar } from 'components';
 
 const ResetPassword = () => {
   const { t } = useTranslation();

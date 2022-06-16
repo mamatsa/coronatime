@@ -1,8 +1,8 @@
 import React from 'react';
-import { ErrorMark } from 'components/svg';
 import { useTranslation } from 'react-i18next';
 import { UseFormRegister } from 'react-hook-form';
 import { FieldErrors } from 'react-hook-form';
+import { ErrorMark } from 'components';
 
 let hasTip: boolean = false;
 

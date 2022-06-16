@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { emailConfirmRequest } from 'services/backendRequestsService';
+import { emailConfirmRequest } from 'services';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { AuthNavbar } from 'components';
 import { CheckCircle } from 'assets';
+import { AuthNavbar } from 'components';
 
 const Confirmation: React.FC<{ text: string }> = (props) => {
   const { t } = useTranslation();

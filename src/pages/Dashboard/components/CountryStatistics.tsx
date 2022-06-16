@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { SelectOption } from 'pages/Dashboard/components/svg';
+import { SelectOption } from 'pages/Dashboard/components';
 import { Country } from 'types';
 
 // helps to find out if sort option have changed

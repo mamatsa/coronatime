@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { registerRequest } from 'services/backendRequestsService';
+import { registerRequest } from 'services';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Input, Button, AuthWrapper } from 'components';
 import { RegisterForm } from 'types';
+import { Input, Button, AuthWrapper } from 'components';
 
 const Register = () => {
   const { t } = useTranslation();

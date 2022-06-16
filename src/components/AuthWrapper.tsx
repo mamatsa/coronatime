@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import AuthNavbar from './AuthNavbar';
+import { AuthNavbar } from 'components';
 import { Vaccine } from 'assets';
 
 const AuthWrapper: React.FC<{

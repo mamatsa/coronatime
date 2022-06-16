@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Logo } from 'components/svg';
-import { LanguageChanger } from 'components';
 import { Link } from 'react-router-dom';
-import { Burger } from 'pages/Dashboard/components/svg';
-import { MobileSidebar } from 'pages/Dashboard/components/';
 import { NavbarComponent } from 'types';
+import { LanguageChanger, Logo } from 'components';
+import { MobileSidebar, Burger } from 'pages/Dashboard/components';
 
 const Navbar: React.FC<NavbarComponent> = (props) => {
   const { t } = useTranslation();

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Statistics } from 'types';
 import {
   NewCasesLine,
   RecoveredLine,
   DeathLine,
-} from 'pages/Dashboard/components/svg';
-import { Statistics } from 'types';
+} from 'pages/Dashboard/components';
 
 const WorldwideStatistics: React.FC<{
   statistics: Statistics;

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { countryRequest } from 'services/backendRequestsService';
+import { countryRequest } from 'services';
 import { useLocation } from 'react-router-dom';
+import { Statistics, DashboardProps, Country } from 'types';
 import {
   Navbar,
   StatisticSwitch,
   WorldwideStatistics,
   CountryStatistics,
 } from 'pages/Dashboard/components';
-import { Statistics, DashboardProps, Country } from 'types';
 
 const Dashboard: React.FC<DashboardProps> = (props) => {
   const { t } = useTranslation();

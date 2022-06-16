@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { User } from 'assets';
 import { useTranslation } from 'react-i18next';
 import { Sidebar } from 'types';
+import { User } from 'assets';
 
 const MobileSidebar: React.FC<Sidebar> = (props) => {
   const { t } = useTranslation();

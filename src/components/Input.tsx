@@ -60,7 +60,7 @@ const Input: React.FC<{
         type={props.type}
         placeholder={props.placeholder}
         {...register}
-        className={`px-6 py-4 mt-2 text-black border-dark-brown border-[1px] rounded-lg w-full outline-main-blue ${
+        className={`px-6 py-4 mt-2 text-black border-dark-brown border-[1px] rounded-lg w-full outline-main-blue xs:min-w-[392px] ${
           props.errors &&
           props.isDirty &&
           !props.errors[props.name] &&

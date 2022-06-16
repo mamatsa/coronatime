@@ -33,11 +33,21 @@ describe('Sign up page', () => {
   });
 
   it('Shows error if username is already taken', () => {
-    cy.get('#username').type('oto');
-    cy.get('#email').type('cypress@gmail.com');
+    cy.get('#username').type('cypress');
+    cy.get('#email').type('otar@redberry.ge');
     cy.get('#password').type('cypress123');
     cy.get('#password2').type('cypress123');
     cy.get('#registerSubmit').click();
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+      statusCode: 422,
+      body: {
+        0: {
+          context: {
+            label: 'username',
+          },
+        },
+      },
+    });
     cy.get('#usernameInputError').should(
       'have.text',
       'This username is already taken'
@@ -50,6 +60,16 @@ describe('Sign up page', () => {
     cy.get('#password').type('cypress123');
     cy.get('#password2').type('cypress123');
     cy.get('#registerSubmit').click();
+    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+      statusCode: 422,
+      body: {
+        0: {
+          context: {
+            label: 'email',
+          },
+        },
+      },
+    });
     cy.get('#emailInputError').should(
       'have.text',
       'This email is already taken'

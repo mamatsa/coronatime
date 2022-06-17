@@ -104,7 +104,7 @@ npx cypress open
 
 ### Project Structure
 
-**Every file is not included.**
+**Every file is not included**
 
 ```bash
 ├─── cypress # test files
@@ -157,18 +157,17 @@ npx cypress open
 
 ### Deployment
 
-Application is deployed on digitalocean server with `ngnix`. You can view it [here](https://coronatime.otar.redberryinternship.ge/).
+**Application is deployed on digitalocean server with `ngnix`. You can view it [here](https://coronatime.otar.redberryinternship.ge/)**
 
-**If you need to deploy this application follow the next steps:
+If you want to deploy this application on your own:
 
-3\. Then copy env example file. You can change environment variables inside .env with your preferences:
+1\. You need to copy env example file on server:
 
 ```sh
 cp .env.example .env
 ```
 
-
-5\. You can also build project for production if you need to:
+2\. And then just build:
 
 ```sh
 npm run build

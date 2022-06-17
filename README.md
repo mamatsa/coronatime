@@ -119,26 +119,32 @@ npx cypress open
 │   ├─── components  # reusable components for whole app
 │   ├─── pages  # application pages
 │   ├───├─── Login
-│   ├───├───├─── components  # components for login
 │   ├───├───├─── Login.tsx  # login page
+│   ├───├───├─── index.ts  # exports Login
+│   ├───├───├─── components  # components for login
 │   ├───├─── Register
 │   ├───├───├─── Register.tsx  # registration page
+│   ├───├───├─── index.ts  # exports Register
 │   ├───├─── RequestResetPassword
 │   ├───├───├─── RequestResetPassword.tsx  # request password reset for specific email
+│   ├───├───├─── index.ts  # exports RequestResetPassword
 │   ├───├─── ResetPassword
 │   ├───├───├─── ResetPassword.tsx  # sets new password
+│   ├───├───├─── index.ts  # exports ResetPassword
 │   ├───├─── Confirmation
 │   ├───├───├─── Confirmation.tsx  # combines auth related pending and confirmation pages
+│   ├───├───├─── index.ts  # exports Confirmation
 │   ├───├─── Dashboard
-│   ├───├───├─── components  # components for dashboard
 │   ├───├───├─── Dashboard.jsx  # covid statistics
+│   ├───├───├─── index.ts  # exports Dashboard
+│   ├───├───├─── components  # components for dashboard
 │   ├───├─── index.ts  # exports all pages
-│   ├─── services # backend request files
-│   ├─── types    # type files
-│   ├─── App.tsx  # main component with routing
-│   ├─── app.css  # main css file
-│   ├─── index.ts # root TS file
-│   ├─── i18n.ts  # i18n configuration
+│   ├─── services  # backend request files
+│   ├─── types     # type files
+│   ├─── App.tsx   # main component with routing
+│   ├─── app.css   # main css file
+│   ├─── index.tsx # root TS file
+│   ├─── i18n.ts   # i18n configuration
 ├─── .env                # environment variables
 ├─── .eslintrc.json      # eslint config file
 ├─── .prettierrc.js      # prettier config file

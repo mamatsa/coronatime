@@ -38,7 +38,7 @@ describe('Sign up page', () => {
     cy.get('#password').type('cypress123');
     cy.get('#password2').type('cypress123');
     cy.get('#registerSubmit').click();
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}register`, {
       statusCode: 422,
       body: {
         0: {
@@ -60,7 +60,7 @@ describe('Sign up page', () => {
     cy.get('#password').type('cypress123');
     cy.get('#password2').type('cypress123');
     cy.get('#registerSubmit').click();
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}register`, {
       statusCode: 422,
       body: {
         0: {
@@ -89,7 +89,7 @@ describe('Sign up page', () => {
 
   it('Registration confirmation error is handled', () => {
     cy.visit('/register/confirm/success');
-    cy.intercept('POST', Cypress.env('resetPasswordApi'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}confirm-account`, {
       statusCode: 401,
     });
   });
@@ -99,14 +99,14 @@ describe('Sign up page', () => {
     cy.get('#email').type('cypress@gmail.com');
     cy.get('#password').type('cypress123');
     cy.get('#password2').type('cypress123');
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}register`, {
       statusCode: 201,
     }).as('req');
     cy.get('#registerSubmit').click();
     cy.url().should('include', '/register/confirm');
     cy.visit('/register/confirm/success?hash=1322323');
     cy.get('#confirmButton').click();
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}confirm-account`, {
       statusCode: 201,
     });
   });

@@ -19,7 +19,6 @@ export default defineConfig({
   },
   video: false,
   env: {
-    baseApiUrl: 'https://coronatime-api.devtest.ge/api/*',
-    resetPasswordApi: 'https://coronatime-api.devtest.ge/api/password/*',
+    baseApiUrl: 'https://coronatime-api.devtest.ge/api/',
   },
 });

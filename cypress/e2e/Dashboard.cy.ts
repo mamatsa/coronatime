@@ -35,14 +35,14 @@ describe('Dashboard', () => {
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');
     cy.get('#loginSubmit').click();
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}login`, {
       statusCode: 201,
       body: {
         token: 123,
       },
     }).as('req');
     cy.wait('@req');
-    cy.intercept('GET', Cypress.env('baseApiUrl'), {
+    cy.intercept('GET', `${Cypress.env('baseApiUrl')}countries`, {
       statusCode: 201,
       body: countries,
     });
@@ -71,13 +71,13 @@ describe('Dashboard', () => {
     cy.visit('/');
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}login`, {
       statusCode: 201,
       body: {
         token: 123,
       },
     });
-    cy.intercept('GET', Cypress.env('baseApiUrl'), {
+    cy.intercept('GET', `${Cypress.env('baseApiUrl')}countries`, {
       statusCode: 401,
     });
     cy.get('#loginSubmit').click();

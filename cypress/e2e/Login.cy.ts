@@ -28,7 +28,7 @@ describe('Login page', () => {
   it('User can not log in if username is wrong', () => {
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}login`, {
       statusCode: 422,
     }).as('req');
     cy.get('#loginSubmit').click();
@@ -39,7 +39,7 @@ describe('Login page', () => {
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');
     cy.get('#loginCheckbox').click();
-    cy.intercept('POST', Cypress.env('baseApiUrl'), {
+    cy.intercept('POST', `${Cypress.env('baseApiUrl')}login`, {
       statusCode: 401,
     }).as('req');
     cy.get('#loginSubmit').click();

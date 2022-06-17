@@ -52,6 +52,16 @@ function App() {
               }
             />
             <Route
+              path='/login'
+              element={
+                <Dashboard
+                  username={user}
+                  token={token}
+                  onLogout={logoutHandler}
+                />
+              }
+            />
+            <Route
               path='/by-country'
               element={
                 <Dashboard

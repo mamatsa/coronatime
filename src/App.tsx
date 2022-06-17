@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   Login,
@@ -13,6 +8,7 @@ import {
   RequestResetPassword,
   ResetPassword,
   Dashboard,
+  NotFound,
 } from 'pages';
 import { Button } from 'components';
 
@@ -43,7 +39,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {token && (
+        {token ? (
           <>
             <Route
               path='/'
@@ -65,14 +61,12 @@ function App() {
                 />
               }
             />
-            <Route path='*' element={<Navigate to='/' replace />} />
           </>
-        )}
-        {!token && (
+        ) : (
           <>
-            <Route path='/login' element={<Login onLogin={loginHandler} />} />
+            <Route path='/login' element={<Login onLogin={loginHandler} />} />{' '}
+            <Route path='/' element={<Login onLogin={loginHandler} />} />
             <Route path='/register' element={<Register />} />
-
             <Route
               path='/register/confirm/*'
               element={<Confirmation text='pending.email_sent' />}
@@ -82,7 +76,6 @@ function App() {
                 element={<Button text={t('sign_in')} id='confirmButton' />}
               />
             </Route>
-
             <Route path='/password' element={<RequestResetPassword />} />
             <Route path='/password/reset' element={<ResetPassword />} />
             <Route
@@ -94,9 +87,9 @@ function App() {
                 element={<Button text={t('sign_in')} id='confirmButton' />}
               />
             </Route>
-            <Route path='*' element={<Navigate to='/login' replace />} />
           </>
         )}
+        <Route path='*' element={<NotFound isLoggedIn={!!token} />} />
       </Routes>
     </Router>
   );

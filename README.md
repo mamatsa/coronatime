@@ -118,26 +118,10 @@ npx cypress open
 │   ├─── assets      # project images
 │   ├─── components  # reusable components for whole app
 │   ├─── pages  # application pages
-│   ├───├─── Login
-│   ├───├───├─── Login.tsx  # login page
-│   ├───├───├─── index.ts  # exports Login
-│   ├───├───├─── components  # components for login
-│   ├───├─── Register
-│   ├───├───├─── Register.tsx  # registration page
-│   ├───├───├─── index.ts  # exports Register
-│   ├───├─── RequestResetPassword
-│   ├───├───├─── RequestResetPassword.tsx  # request password reset for specific email
-│   ├───├───├─── index.ts  # exports RequestResetPassword
-│   ├───├─── ResetPassword
-│   ├───├───├─── ResetPassword.tsx  # sets new password
-│   ├───├───├─── index.ts  # exports ResetPassword
-│   ├───├─── Confirmation
-│   ├───├───├─── Confirmation.tsx  # combines auth related pending and confirmation pages
-│   ├───├───├─── index.ts  # exports Confirmation
-│   ├───├─── Dashboard
-│   ├───├───├─── Dashboard.jsx  # covid statistics
-│   ├───├───├─── index.ts  # exports Dashboard
-│   ├───├───├─── components  # components for dashboard
+│   ├───├─── page-folder  # pattern for each application page
+│   ├───├───├─── page-component-file.tsx  # page component file
+│   ├───├───├─── index.ts                 # exports page
+│   ├───├───├─── page-components-folder   # [OPTIONAL] stores page specific components
 │   ├───├─── index.ts  # exports all pages
 │   ├─── services  # backend request files
 │   ├─── types     # type files

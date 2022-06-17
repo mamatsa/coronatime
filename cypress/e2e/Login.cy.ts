@@ -35,6 +35,11 @@ describe('Login page', () => {
     cy.get('#usernameInputError').should('not.be.empty');
   });
 
+  it('User can see not found page', () => {
+    cy.visit('/not-found');
+    cy.get('#goBack').click();
+  });
+
   it('User can not log in if password is wrong', () => {
     cy.get('#username').type('cypress');
     cy.get('#password').type('password');

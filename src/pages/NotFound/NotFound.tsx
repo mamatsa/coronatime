@@ -11,6 +11,7 @@ const NotFound: React.FC<{ isLoggedIn: boolean }> = (props) => {
         <Link
           to={props.isLoggedIn ? '/' : '/login'}
           className=' underline font-semibold'
+          id='goBack'
         >
           GO BACK
         </Link>

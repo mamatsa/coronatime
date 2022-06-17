@@ -82,6 +82,7 @@ describe('Dashboard', () => {
     });
     cy.get('#loginSubmit').click();
     cy.get('#dashboardError').should('be.visible');
-    cy.get('#dashboardLogout').click();
+    cy.visit('/blabla');
+    cy.get('#goBack').click();
   });
 });

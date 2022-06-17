@@ -159,6 +159,21 @@ npx cypress open
 
 Application is deployed on digitalocean server with `ngnix`. You can view it [here](https://coronatime.otar.redberryinternship.ge/).
 
+**If you need to deploy this application follow the next steps:
+
+3\. Then copy env example file. You can change environment variables inside .env with your preferences:
+
+```sh
+cp .env.example .env
+```
+
+
+5\. You can also build project for production if you need to:
+
+```sh
+npm run build
+```
+
 #
 
 ### Resources

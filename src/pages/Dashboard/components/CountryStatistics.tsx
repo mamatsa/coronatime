@@ -44,43 +44,23 @@ const CountryStatistics: React.FC<{
   ) {
     prevSortOption = sortOption;
     prevSortOrder = sortOrder;
-    switch (sortOption) {
-      case 'cases':
-        setFilteredCountries((prevState) => {
-          return prevState.sort((a, b) => {
-            if (sortOrder === 'asc')
-              return a.statistics.confirmed - b.statistics.confirmed;
-            return b.statistics.confirmed - a.statistics.confirmed;
-          });
+    if (sortOption === 'location') {
+      setFilteredCountries((prevState) => {
+        return prevState.sort((a, b) => {
+          if (sortOrder === 'asc')
+            return a.name[language] > b.name[language] ? 1 : -1;
+          return a.name[language] < b.name[language] ? 1 : -1;
         });
-        break;
-      case 'deaths':
-        setFilteredCountries((prevState) => {
-          return prevState.sort((a, b) => {
-            if (sortOrder === 'asc')
-              return a.statistics.deaths - b.statistics.deaths;
-            return b.statistics.deaths - a.statistics.deaths;
-          });
+      });
+    } else {
+      setFilteredCountries((prevState) => {
+        return prevState.sort((a, b) => {
+          const sortOptionKey = sortOption as keyof typeof a.statistics;
+          if (sortOrder === 'asc')
+            return a.statistics[sortOptionKey] - b.statistics[sortOptionKey];
+          return b.statistics[sortOptionKey] - a.statistics[sortOptionKey];
         });
-        break;
-      case 'recovered':
-        setFilteredCountries((prevState) => {
-          return prevState.sort((a, b) => {
-            if (sortOrder === 'asc')
-              return a.statistics.recovered - b.statistics.recovered;
-            return b.statistics.recovered - a.statistics.recovered;
-          });
-        });
-        break;
-      case 'location':
-        setFilteredCountries((prevState) => {
-          return prevState.sort((a, b) => {
-            if (sortOrder === 'asc')
-              return a.name[language] > b.name[language] ? 1 : -1;
-            return a.name[language] < b.name[language] ? 1 : -1;
-          });
-        });
-        break;
+      });
     }
   }
 
@@ -144,12 +124,12 @@ const CountryStatistics: React.FC<{
                   className=' flex items-center justify-center flex-col gap-1 cursor-pointer sm:flex-row sm:justify-start  md:gap-2 '
                   id='sortByCases'
                   onClick={() => {
-                    sortOptionClickHandler('cases');
+                    sortOptionClickHandler('confirmed');
                   }}
                 >
                   <>
                     {t('dashboard.new_cases')}
-                    {sortOption === 'cases' ? (
+                    {sortOption === 'confirmed' ? (
                       <SelectOption order={sortOrder} />
                     ) : (
                       <SelectOption />

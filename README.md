@@ -145,7 +145,7 @@ npx cypress open
 
 If you want to deploy this application on your own:
 
-1\. You need to copy env example file on server:
+1\. You need to copy env example file on server. You should update env variables with your needs:
 
 ```sh
 cp .env.example .env

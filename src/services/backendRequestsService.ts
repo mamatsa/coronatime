@@ -20,7 +20,7 @@ export const registerRequest = async (
     email,
     password,
     repeatPassword,
-    redirectOnConfirm: `http://${window.location.host}/register/confirm/success`,
+    redirectOnConfirm: `${process.env.REACT_APP_DOMAIN}/register/confirm/success`,
   });
 };
 
@@ -33,7 +33,7 @@ export const emailConfirmRequest = async (hash: string | null) => {
 export const passwordRecoveryLinkRequest = async (email: string) => {
   await axiosInstance.post('/password/send-recovery-link', {
     email,
-    backlink: `http://${window.location.host}/password/reset`,
+    backlink: `${process.env.REACT_APP_DOMAIN}/password/reset`,
   });
 };
 

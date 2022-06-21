@@ -1,0 +1,30 @@
+[
+  {
+    "name": {
+      "en": "Afghanistan",
+      "ka": "ავღანეთი"
+    },
+    "statistics": {
+      "confirmed": 3401,
+      "recovered": 2523,
+      "critical": 1598,
+      "deaths": 1474
+    },
+    "_id": "628360785af42d12eef05c44",
+    "code": "AF"
+  },
+  {
+    "name": {
+      "en": "Albania",
+      "ka": "ალბანეთი"
+    },
+    "statistics": {
+      "confirmed": 2087,
+      "recovered": 3348,
+      "critical": 4263,
+      "deaths": 3776
+    },
+    "_id": "628360785af42d12eef05c45",
+    "code": "AL"
+  }
+]

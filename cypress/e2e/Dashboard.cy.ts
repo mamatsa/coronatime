@@ -1,34 +1,3 @@
-const countries = [
-  {
-    name: {
-      en: 'Afghanistan',
-      ka: 'ავღანეთი',
-    },
-    statistics: {
-      confirmed: 3401,
-      recovered: 2523,
-      critical: 1598,
-      deaths: 1474,
-    },
-    _id: '628360785af42d12eef05c44',
-    code: 'AF',
-  },
-  {
-    name: {
-      en: 'Albania',
-      ka: 'ალბანეთი',
-    },
-    statistics: {
-      confirmed: 2087,
-      recovered: 3348,
-      critical: 4263,
-      deaths: 3776,
-    },
-    _id: '628360785af42d12eef05c45',
-    code: 'AL',
-  },
-];
-
 describe('Dashboard', () => {
   it('User can use full dashboard functionality', () => {
     cy.visit('/');
@@ -42,9 +11,11 @@ describe('Dashboard', () => {
       },
     }).as('req');
     cy.wait('@req');
-    cy.intercept('GET', `${Cypress.env('baseApiUrl')}countries`, {
-      statusCode: 201,
-      body: countries,
+    cy.fixture('countries.json').then((countries) => {
+      cy.intercept('GET', `${Cypress.env('baseApiUrl')}countries`, {
+        statusCode: 201,
+        body: countries,
+      });
     });
     cy.get('#dashboardCountriesNavLink').click();
     cy.get('#sortByLocation').click();
